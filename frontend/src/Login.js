@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Form, Button, Nav } from 'react-bootstrap';
+import { Container, Form, Button, Nav, Table } from 'react-bootstrap';
 import { NavBar } from './Components/Navbar'
+import { GetSongs } from './get_songs'
 
 let url = 'http://127.0.0.1:8000'
 
 export default function Login() {
 
-
-    function postData(url) {
-
-        fetch(`${url}/`)
-            .then((response) => response.json())
-            .then((result) => console.log(result))
-            .catch((error) => console.log('error', error))
-    }
-
     return(
-        <Container className="align-items-center d-flex" sytle={{ height:'100vh'}}>
-            <div>
+        <Container className="outside">
+            <div className="navbar">
                 {/* <a className="title">Spotify Songs List</a> */}
                 <NavBar />
             </div>
-            <div>
-                <Button onClick={() => {postData(url)}}> Click It !!!</Button>
+            <div className="mb-2">
+                <Button onClick={() => {GetSongs(url)}}> Click It !!!</Button>
             </div>
 
+            {/* <Table strpied borderd hover vareiant="dark">
+                
+            </Table> */}
 
+
+            
             {/* <Form>
                 <Form.Group className='mb-3' controlId="formId">
                 <Form.Label>Account ID</Form.Label>
