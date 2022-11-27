@@ -69,10 +69,11 @@ p.success {
 p.danger {
 	color: red;
 }
+
 /************ Navbar Css ************/
 nav.navbar {
   padding: 18px 0;
-  position: fixed;
+  position: relative;
   width: 100%;
   top: 0;
   z-index: 9999;
@@ -159,7 +160,7 @@ span.navbar-text {
   content: "";
   width: 0%;
   height: 100%;
-  position: absolute;
+  position: relative;
   background-color: #fff;
   left: 0;
   top: 0;
@@ -184,7 +185,7 @@ nav.navbar .navbar-toggler-icon {
   width: 100px;
   height: 100px;
   background-image: none;
-  position: fixed;
+  position: relative;
   border-bottom: 2px solid #fff;
   transition: all 300ms linear;
   top: -2px;
@@ -195,7 +196,7 @@ nav.navbar .navbar-toggler-icon:focus {
 nav.navbar .navbar-toggler-icon:after,
 nav.navbar .navbar-toggler-icon:before {
 	width: 20px;
-	position: absolute;
+	position: relative;
 	height: 50px;
 	background-color: #fff;
 	top: 0;
