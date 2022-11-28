@@ -4,23 +4,20 @@ export function GetSongs(url) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        async function postData(url) {
+        async function getData(url) {
             const headers = { 
                 'Content-Type': 'application/json',
             };
     
-            const res = await fetch(`${url}/`, { 
+            const response = await fetch('http://127.0.0.1:8000/', { 
                 headers: headers,
-                method: 'POST',
-            })
-            .then(response => response.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response))
+                method: 'GET',
+            });
 
-            const data = await res.json();
-            postData(data["message"]);
+            const data = await response.json();
+            setData(data["message"]);
         }
-        postData();
+        getData();
     }, []);
     return data;
 }

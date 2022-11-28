@@ -5,24 +5,26 @@ import { GetSongs } from './get_songs'
 
 let url = 'http://127.0.0.1:8000'
 
-export default function Login() {
-
+export const Login = () => {
+    const data = [];
     return(
         <Container className="outside">
             <div className="navbar">
-                {/* <a className="title">Spotify Songs List</a> */}
+                <a className="title">Spotify Songs List</a>
                 <NavBar />
             </div>
             <div className="mb-2">
-                <Button onClick={() => {GetSongs(url)}}> Click It !!!</Button>
+                console.log()
+                {/* <Button onClick={() => {data = GetSongs(url)}}> Click It !!!</Button> */}
+            </div>
+            <div>
+
             </div>
 
             {/* <Table strpied borderd hover vareiant="dark">
                 
             </Table> */}
 
-
-            
             {/* <Form>
                 <Form.Group className='mb-3' controlId="formId">
                 <Form.Label>Account ID</Form.Label>
