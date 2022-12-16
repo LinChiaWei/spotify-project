@@ -24,6 +24,7 @@ print(data)
 @app.get("/")
 def read_root():
     data = get_data()
+    print(type(data))
     print(data)
     return {"message": data}
     

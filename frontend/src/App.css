@@ -4,12 +4,6 @@
   box-sizing: border-box;
 }
 
-.outside {
-  padding: 10px;
-  width: 100%;
-}
-
-
 .mb-2.button {
   background: rgb(19, 38, 146);
   color: red;
@@ -86,10 +80,21 @@ p.danger {
 }
 
 /************ Navbar Css ************/
+<<<<<<< HEAD
 nav.navbar {
   padding: 18px 0;
   padding: 0px;
+=======
+.title {
+  color:rgb(19, 38, 146);
+>>>>>>> a9b7955f819bf3d2933b2bccfd0e94c68fa9046c
   position: relative;
+}
+
+nav.navbar {
+  padding: 18px 0;
+  padding: 0px;
+
   width: 100%;
   top: 0;
   z-index: 9999;
@@ -106,7 +111,7 @@ nav.navbar .navbar-nav .nav-link.navbar-link {
   font-weight: 400;
   color: rgb(230, 212, 52) !important;
   letter-spacing: 0.8px;
-  padding: 40px;
+  padding: 20px;
   font-size: 18px;
   opacity: 0.8;
   display: inline-flex;
@@ -128,7 +133,7 @@ span.navbar-text {
 .social-icon a {
     width: 42px;
     height: 42px;
-    background: rgba(138, 5, 5, 0.1);
+    background: rgba(5, 138, 23, 0.1);
     display: inline-flex;
     border-radius: 50%;
     margin-right: 6px;

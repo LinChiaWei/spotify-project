@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Login from './Login'
+import { Login } from './Login'
 import './App.css'
 
 const App = () => {
