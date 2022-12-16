@@ -1,7 +1,8 @@
-from secrets import *
 import spotipy
 import spotipy.util as util
+from secrets import *
 from get_token import *
+
 
 
 def find_songs_name(items):

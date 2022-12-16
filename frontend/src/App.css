@@ -87,11 +87,8 @@ p.danger {
 
 /************ Navbar Css ************/
 nav.navbar {
-<<<<<<< HEAD
   padding: 18px 0;
-=======
   padding: 0px;
->>>>>>> 34e564f83186727f817824b9f8ace6730300cc3f
   position: relative;
   width: 100%;
   top: 0;
