@@ -16,8 +16,12 @@ def find_songs_name(items):
 
     return last50songs
 
+def take_second(list):
+    return list[1]
+
 def get_data():
     song_count = {}
+    song_list = []
     token = get_token()
     headers = {"Authorization": "Bearer {}".format(token)}
 
@@ -35,6 +39,15 @@ def get_data():
         song_count[song] = 0
 
     for song in last50songs:
-        song_count[song]+=1
+        song_count[song] +=1
 
-    return song_count
+    for item in song_count:
+        dic = {}
+        dic['SongName'] = item
+        dic['Count'] = song_count[item]
+        data = [item, song_count[item]]
+        song_list.append(data)
+
+    song_list.sort(key=take_second,reverse=True)
+
+    return song_list

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export function GetSongs(url) {
-    const [data, setData] = useState([]);
+    const [list, setData] = useState([]);
 
     useEffect(() => {
         async function getData() {
@@ -19,5 +19,5 @@ export function GetSongs(url) {
         }
         getData();
     }, []);
-    return data;
+    return list;
 }
