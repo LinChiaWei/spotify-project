@@ -10,18 +10,20 @@ export const SongsList = (props) => {
   // var str = JSON.stringify(props.data);
     return(
         <div>
-          <Table striped>
+          <Table striped bordered hover variant="dark">
             <thead>
               <tr>
-                <th>SongName</th>
-                <th>ListenCount</th>
+                <th> </th>
+                <th>Song Name</th>
+                <th>Listen Rank</th>
               </tr>
             </thead>
             {props.data.map(item => (
               <tbody>
                 <tr>
+                  <td><img src={item[1]}></img></td>
                   <td>{item[0]}</td>
-                  <td>{item[1]}</td>
+                  <td>{item[2]}</td>
                 </tr>
               </tbody>
           ))}
