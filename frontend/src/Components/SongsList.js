@@ -21,7 +21,7 @@ export const SongsList = (props) => {
             {props.data.map(item => (
               <tbody>
                 <tr>
-                  <td><img src={item[1]}></img></td>
+                  <td><img style={{ height:150, width:150}} src={item[1]}></img></td>
                   <td>{item[0]}</td>
                   <td>{item[2]}</td>
                 </tr>
