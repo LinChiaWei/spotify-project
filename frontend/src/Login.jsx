@@ -16,8 +16,8 @@ export const Login = () => {
             <div className="navbar">
                 <NavBar />
             </div> 
-            <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
-                <div className={`${styles.boxWidth}`}>
+            <div>
+                <div >
                 <SongsList data={SongsCount} />
                 </div>
             </div>

@@ -1,5 +1,10 @@
+@font-face{
+  font-family:"Noto-Sans";
+  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500&display=swap');
+}
+
 * {
-  margin: 0;
+  margin: 'auto';
   padding: 0;
   box-sizing: border-box;
 }
@@ -49,10 +54,9 @@ a:hover {
 }
 
 .navbar-brand {
-  padding: 10px;
+  padding: 0px;
   width: 5%;
   height: 10;
-  float: left;
 }
 
 /* button {
@@ -67,7 +71,7 @@ input:focus, textarea:focus, select:focus {
 @media (min-width:1700px) {
 	main .container {
 		max-width: 100%;
-		padding: 0 150px;
+		padding: 0 0px;
 	}
 }
 
@@ -81,34 +85,45 @@ p.danger {
 
 /************ Navbar Css ************/
 .title {
-  color:rgb(19, 38, 146);
+  font-family:"Noto-Sans" , sans-serif;
+  font-weight: 500;
+  border:#121212;
+  font-size: larger;
+  background-color: transparent;
+  color:rgb(245, 240, 240);
+  font-weight: 900;
   position: relative;
 }
 
-nav.navbar {
-  padding: 18px 0;
-  padding: 0px;
+nav .container {
+  max-width: 100%;
+  height: 75px;
+  background: #121212;
+  background: linear-gradient(0deg, #121212 -5%, rgb(60, 100, 45) 150%);
+}
 
+.navbar {
+  padding: 0px 0px 20px 0px;
   width: 100%;
-  top: 0;
-  z-index: 9999;
   transition:  0.32s ease-in-out;
 }
+
+
 nav.navbar.scrolled {
-  padding: 0px 0;
+  padding: 20px 0;
   background-color: #121212; 
 }
 nav.navbar a.navbar-brand {
-    width: 9%;
+    width: 10%;
 }
 nav.navbar .navbar-nav .nav-link.navbar-link {
   font-weight: 400;
+  position: relative;
   color: rgb(230, 212, 52) !important;
   letter-spacing: 0.8px;
-  padding: 20px;
   font-size: 18px;
   opacity: 0.8;
-  display: inline-flex;
+
 }
 nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
 nav.navbar .navbar-nav a.nav-link.navbar-link.active {
@@ -184,6 +199,7 @@ span.navbar-text {
 }
 .navbar-text button:hover {
   color: #121212;
+  z-index: 9999;
 }
 .navbar-text button:hover::before {
 	content: "";
@@ -308,173 +324,4 @@ nav.navbar-text.vvd
 }
 .txt-rotate > .wrap {
   border-right: 0.08em solid #666;
-}
-
-/************ Skills Css ***************/
-.skill {
-  padding: 0 0 50px 0;
-  position: relative;
-}
-.skill-bx {
-  background: rgb(18, 167, 31) !important;
-  border-radius: 30px;
-  text-align: center;
-  padding: 60px 50px;
-  margin-top: -20px;
-}
-.skill h2 {
-  color:  rgb(204, 31, 31);
-	font-size: 50px;
-	font-weight: 700;
-}
-.skill p {
-    color: #e4c021;
-    font-size: 20px;
-    font-weight: 550;
-    letter-spacing: 0.8px;
-    line-height: 1.5em;
-    margin: 15px 0 75px 0;
-}
-.skill-slider {
-  width: 80%;
-  margin: 0 auto;
-  position: relative;
-}
-.skill-slider .item img {
-  width: 60%;
-  margin: 0 auto 15px auto;
-}
-.background-image-left {
-  top: 20%;
-  position: relative;
-  width: 100%;
-  bottom: 20px;
-  z-index: -4;
-}
-
-/**************** Projects *******************/
-
-.project {
-  padding: 80px 0;
-  position: relative;
-  background-color: black;
-}
-.project h2 {
-	font-size: 45px;
-	font-weight: 700;
-  text-align: center;
-}
-.project p {
-  color: #B8B8B8;
-  font-size: 18px;
-  letter-spacing: 0.8px;
-  line-height: 1.5em;
-  margin: 14px auto 30px auto;
-  text-align: center;
-  width: 56%;
-}
-.project .nav.nav-pills {
-  width: 72%;
-  margin: 0 auto;
-  border-radius: 50px;
-  background-color: rgb(255 255 255 / 10%);
-  overflow: hidden;
-}
-.project .nav.nav-pills .nav-item {
-  width: 33.33333%;
-}
-.project .nav.nav-pills .nav-link {
-  background-color: transparent;
-  border-radius: 0;
-  padding: 17px 0;
-  color: #fff;
-  width: 100%;
-  font-size: 17px;
-  letter-spacing: 0.8px;
-  font-weight: 500;
-  position: relative;
-  transition: 0.3s ease-in-out;
-  text-align: center;
-  z-index: 0;
-}
-.project .nav.nav-pills .nav-link::before {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: 0.3s ease-in-out;
-}
-.project .nav.nav-pills .nav-link.active::before {
-    width: 100% !important;
-}
-.project .nav.nav-pills .nav-link.active {
-    border: 1px solid rgba(255, 255, 255, 1);
-}
-.nav-link#projects-tabs-tab-first {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 55px 0px 0px 55px;
-}
-.nav-link#projects-tabs-tab-second {
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-}
-.nav-link#projects-tabs-tab-third {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 0 55px 55px 0;
-}
-.proj-imgbx {
-  position: relative;
-  border-radius: 30px;
-  overflow: hidden;
-  margin-bottom: 24px;
-}
-.proj-imgbx::before {
-  content: "";
-  background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
-  opacity: 0.85;
-  position: absolute;
-  width: 100%;
-  height: 0;
-  transition: 0.4s ease-in-out;
-}
-.proj-imgbx:hover::before {
-  height: 100%;
-}
-.proj-txtx {
-  position: absolute;
-  text-align: center;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: 0.5s ease-in-out;
-  opacity: 0;
-  width: 100%;
-}
-.proj-imgbx:hover .proj-txtx {
-  top: 50%;
-  opacity: 1;
-}
-.proj-txtx h4 {
-  font-size: 30px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  line-height: 1.1em;
-}
-.proj-txtx span {
-  font-style: italic;
-  font-weight: 400;
-  font-size: 15px;
-  letter-spacing: 0.8px;
-}
-.background-image-right {
-  top: 20%;
-  position: absolute;
-  bottom: 0;
-  width: 35%;
-  right: 0;
-  z-index: -4;
 }

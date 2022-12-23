@@ -1,3 +1,4 @@
+import { fontFamily } from "@mui/system";
 import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import logo from '../assets/img/Google.png';
@@ -30,18 +31,20 @@ export const NavBar = () => {
         <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
           <Container>
             <Navbar.Brand href="/">
-              <button className="title"><div>Spotify Songs</div></button>
+              <button className="title">
+                <span>Spotify Song Rank</span>
+              </button>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav">
               <span className="navbar-toggler-icon"></span>
             </Navbar.Toggle>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
+                {/* <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link> */}
               </Nav>
-              <span className="navbar-text">
+              {/* <span className="navbar-text">
                   <button className="vvd"><span>Let's Connect</span></button>
-              </span>
+              </span> */}
             </Navbar.Collapse>
           </Container>
         </Navbar>

@@ -1,25 +1,92 @@
-import { TbCurrentLocation } from 'react-icons/tb';
-import { RiSuitcaseLine } from 'react-icons/ri';
-import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import Table from 'react-bootstrap/Table'
-import  { Button,Container, textFieldClasses} from '@mui/material'
-// import { Container } from 'react-bootstrap';
+import Grid from '@mui/system/Unstable_Grid';
+import { Card, Box, CardContent, Typography, Paper, CardMedia} from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+
 
 
 export const SongsList = (props) => {
   // console.log(props.data)
   // var str = JSON.stringify(props.data);
   // const theme = useTheme();
-
     return(
-      <Container>
-        <Button variant="text">
-          Text
-        </Button>
-      </Container>
+      <div>
+        <Grid container spacing={2} >
+        {props.data.map((item, index) => ( 
+              <Grid key={item[0]} xs={6} md={3} padding={2}>
+                <Card sx={{
+                  border: '5px solid',
+                  borderColor: 'DarkSlateGray',
+                  backgroundColor: 'black',
+                  padding:'0px 5px 2px 5px'
+                }}>
+                  <Paper sx={{
+                    textAlign:'center',
+                    fontSize: 25,
+                    letterSpacing: 0.5,
+                    fontWeight: 'bold',
+                    color:'Crimson',
+                    backgroundColor: 'black',
+                    boxShadow: 1,
+                    padding:'2px',
+                    borderRadius:2}}
+                    justifyContent="center"
+                    >
+                    <div>
+                      Rank {index+1}
+                    </div>
+                  </Paper>
+
+                  <CardMedia
+                  component="img"
+                  height="200"
+                  image={item[1]}
+                  alt={"alt"}
+                  sx={{ padding: "0px 0px 0px 0px ", objectFit: "contain"}}
+                  />
+
+                  <Paper sx={{
+                    fontSize: 20,
+                    textAlign:'center',
+                    alignItems:'center',
+                    fontWeight: 'Medium',
+                    color:'white',
+                    backgroundColor: 'black',
+                    boxShadow: 1,
+                    padding:'8px',
+                    borderRadius:2
+                  }} 
+                  justifyContent="center"
+                  >
+                    <div>
+                      {item[0]}
+                    </div>
+                  </Paper>
+
+                  <Paper sx={{
+                    textAlign:'center',
+                    alignItems:'center',
+                    fontWeight: 'Medium',
+                    color:'LightGreen',
+                    backgroundColor: 'black',
+                    boxShadow: 1,
+                    padding:'3px',
+                  }} 
+                  justifyContent="center"
+                  >
+                    <div>
+                      Song Count : {item[2]}
+                    </div>
+                  </Paper>
       
+                </Card>
+              </Grid>
+          ))}
+        </Grid>
+      </div> 
+
+
         // <div>
         //   <Table striped bordered hover variant="dark">
         //     <thead>
@@ -39,16 +106,6 @@ export const SongsList = (props) => {
         //       </tbody>
         //   ))}
         //   </Table>
-        // </div>
-
-
-        // <div className="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-bg cursor-pointer">
-        //     {props.data.map(item => (
-        //       <img style={{ height:150, width:150}} src={item[1]}></img>
-
-
-        //   ))}
-          
         // </div>
 
     );
