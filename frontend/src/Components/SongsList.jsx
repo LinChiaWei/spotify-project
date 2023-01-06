@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table'
 import Grid from '@mui/system/Unstable_Grid';
 import { Card, Box, CardContent, Typography, Paper, CardMedia} from '@mui/material';
 import React from 'react';
+import Marquee from "react-fast-marquee";
 
 
 
@@ -26,6 +27,7 @@ export const SongsList = (props) => {
                     fontSize: 25,
                     letterSpacing: 0.5,
                     fontWeight: 'bold',
+                    opacity: 0.9,
                     color:'Crimson',
                     backgroundColor: 'black',
                     boxShadow: 1,
@@ -47,14 +49,14 @@ export const SongsList = (props) => {
                   />
 
                   <Paper sx={{
-                    fontSize: 20,
+                    fontSize: 15,
                     textAlign:'center',
                     alignItems:'center',
                     fontWeight: 'Medium',
                     color:'white',
                     backgroundColor: 'black',
                     boxShadow: 1,
-                    padding:'8px',
+                    padding:'7px',
                     borderRadius:2
                   }} 
                   justifyContent="center"
@@ -65,10 +67,12 @@ export const SongsList = (props) => {
                   </Paper>
 
                   <Paper sx={{
+                    fontSize: 12,
                     textAlign:'center',
                     alignItems:'center',
                     fontWeight: 'Medium',
-                    color:'LightGreen',
+                    color:'white',
+                    opacity: 0.7,
                     backgroundColor: 'black',
                     boxShadow: 1,
                     padding:'3px',
