@@ -23,9 +23,7 @@ def backend():
     print(data)
     return {"message": data}
 
-@app.get("/callback")
-def backend():
-    data = get_data()
-    print(data)
-    return {"message": data}
+# @app.get("/callback")
+# def backend():
+#     print("HELLO")
     

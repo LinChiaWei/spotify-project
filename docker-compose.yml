@@ -7,6 +7,8 @@ services:
       - 8000:8000
     volumes:
       - ./backend/models:/models
+    environment:
+      SPOTIPY_REDIRECT_URI: 'http://localhost:8888/callback/'
 
   frontend:
     container_name: frontend
