@@ -1,8 +1,7 @@
-import Table from 'react-bootstrap/Table'
 import Grid from '@mui/system/Unstable_Grid';
-import { Card, Box, CardContent, Typography, Paper, CardMedia} from '@mui/material';
+import { Card,Paper, CardMedia} from '@mui/material';
 import React from 'react';
-import Marquee from "react-fast-marquee";
+// import Marquee from "react-fast-marquee";
 
 
 

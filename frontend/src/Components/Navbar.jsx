@@ -1,7 +1,7 @@
-import { fontFamily } from "@mui/system";
+// import { fontFamily } from "@mui/system";
 import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import logo from '../assets/img/Google.png';
+// import logo from '../assets/img/Google.png';
 
 
 export const NavBar = () => {

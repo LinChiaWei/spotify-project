@@ -1,6 +1,6 @@
 import spotipy
 import spotipy.util as util
-from get_token import *
+from models.get_token import get_token
 
 
 
@@ -29,7 +29,7 @@ def get_data():
     song_list = []
     token = get_token()
     headers = {"Authorization": "Bearer {}".format(token)}
-
+    print(headers)
 
     sp = spotipy.client.Spotify(headers)
 

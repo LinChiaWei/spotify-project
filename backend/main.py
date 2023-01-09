@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from get_data import get_data
+from models.get_data import get_data
 
 app = FastAPI()
 
@@ -17,14 +17,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-data = get_data()
-
-print(data)
-
 @app.get("/")
-def read_root():
+def backend():
     data = get_data()
-    print(type(data))
+    print(data)
+    return {"message": data}
+
+@app.get("/callback")
+def backend():
+    data = get_data()
     print(data)
     return {"message": data}
     
