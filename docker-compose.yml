@@ -15,3 +15,15 @@ services:
     build: ./frontend
     ports:
       - 3000:3000
+
+  db:
+    image: postgres:13
+    ports:
+     - 5432:5432
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+    volumes:
+    #  - ./database/pg:/var/lib/postgresql
+     - ./database/create_table.sql:/docker-entrypoint-initdb.d/create_tables.sql
+     
