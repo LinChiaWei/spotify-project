@@ -13,7 +13,7 @@ def insert_db(data):
 
         cursor.executemany("INSERT INTO song_list (song_name, image_url, song_count) VALUES(%s, %s, %s)", data)
         print("Insert Table successfully")
-
+        
         connection.commit()
         connection.close()
   

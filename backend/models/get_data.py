@@ -3,7 +3,6 @@ import spotipy.util as util
 from models.get_token import get_token
 
 
-
 def find_songs_name(items):
     last50songs = []
     for i in range(len(items)):
@@ -29,7 +28,7 @@ def get_data():
     song_list = []
     token = get_token()
     headers = {"Authorization": "Bearer {}".format(token)}
-    print(headers)
+    # print(headers)
 
     sp = spotipy.client.Spotify(headers)
 
