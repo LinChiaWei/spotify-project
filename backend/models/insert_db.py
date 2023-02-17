@@ -6,11 +6,6 @@ def insert_db(data):
 
         cursor = connection.cursor()
 
-        # sql = """CREATE TABLE IF NOT EXISTS Song_List (
-        #     song_name TEXT NOT NULL UNIQUE,
-        #     image_url TEXT NOT NULL,
-        #     song_count TEXT NOT NULL,);"""
-
         cursor.executemany("INSERT INTO song_list (song_name, image_url, song_count) VALUES(%s, %s, %s)", data)
         print("Insert Table successfully")
         
@@ -21,7 +16,6 @@ def insert_db(data):
         print("Failed to insert record into mobile table", error)
 
     finally:
-        # closing database connection.
         if connection:
             cursor.close()
             connection.close()

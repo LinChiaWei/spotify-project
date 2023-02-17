@@ -2,11 +2,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from models.get_data import get_data
 from models.insert_db import insert_db
-from models.select_db import update_db
+from models.update_db import update_db
+from models.check_db import check_db
+from models.get_db_data import get_db_data
 
 
 app = FastAPI()
-
 
 origins = [
     "*"
@@ -22,10 +23,18 @@ app.add_middleware(
 
 @app.get("/")
 def backend():
-    data = get_data()
-    update_db()
-    # insert_db(data)
-    # print(data)
+    check = check_db()
+    print(check)
+    data = []
+    # data = get_data()
+    # new_data = get_data()
+    # if(check):
+    #     # update_db(new_data)
+    #     print("error")
+    # else:
+    #     insert_db(new_data)
+
+    # data = get_db_data()
     return {"message": data}
 
 # @app.get("/callback")

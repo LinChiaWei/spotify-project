@@ -4,12 +4,7 @@ import React from 'react';
 // import Marquee from "react-fast-marquee";
 
 
-
-
 export const SongsList = (props) => {
-  // console.log(props.data)
-  // var str = JSON.stringify(props.data);
-  // const theme = useTheme();
     return(
       <div>
         <Grid container spacing={2} >
