@@ -27,14 +27,14 @@ def backend():
     print(check)
     data = []
     # data = get_data()
-    # new_data = get_data()
-    # if(check):
-    #     # update_db(new_data)
-    #     print("error")
-    # else:
-    #     insert_db(new_data)
+    new_data = get_data()
+    if(check):
+        update_db(new_data)
+        print("error")
+    else:
+        insert_db(new_data)
 
-    # data = get_db_data()
+    data = get_db_data()
     return {"message": data}
 
 # @app.get("/callback")

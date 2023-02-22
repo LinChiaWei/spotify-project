@@ -5,7 +5,6 @@ def update_db(new_data):
     exists = False
     # try:
     connection = psycopg2.connect(database="postgres",user="postgres",password="postgres",host="db",port='5432')
-
     cursor = connection.cursor()
 
     # cursor.execute("SELECT * FROM song_list;")
@@ -22,7 +21,7 @@ def update_db(new_data):
     #     connection.commit()
     #     connection.close()
     # else:
-
+    
     cursor.execute("SELECT * FROM song_list;")
     print("select Table successfully")
     db_data = cursor.fetchall()
