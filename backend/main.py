@@ -24,13 +24,11 @@ app.add_middleware(
 @app.get("/")
 def backend():
     check = check_db()
-    print(check)
     data = []
     # data = get_data()
     new_data = get_data()
     if(check):
         update_db(new_data)
-        print("error")
     else:
         insert_db(new_data)
 
