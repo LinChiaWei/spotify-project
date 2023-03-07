@@ -14,8 +14,9 @@
   * Get data from database.  
 #### Frontend
   * Connect the server and get data.
-  * Display the data on the website.
-  
+  * Display the data on the website.  
+  ![未命名](https://user-images.githubusercontent.com/62389828/223510787-ddfd1a5c-cdfc-480c-be07-3498a46a0f0b.png)
+
 ### Future works  
   * fetch data automatically.
   * Data display with different time intervals.
