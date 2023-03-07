@@ -1,6 +1,7 @@
 import spotipy
 import spotipy.util as util
 from models.get_token import get_token
+from models.get_token import find_token
 
 
 def find_songs_name(items):
@@ -65,3 +66,12 @@ def get_data():
     song_list.sort(key=take_second,reverse=True)
 
     return song_list
+
+def get_user_inf():
+    token = find_token()
+    headers = {"Authorization": "Bearer {}".format(token)}
+    sp = spotipy.client.Spotify(headers)
+    user = sp.me()
+    print(user)
+    print(user['display_name'])
+    print(user['images'][0]['url'])
