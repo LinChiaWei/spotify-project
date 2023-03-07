@@ -1,0 +1,29 @@
+version: '3'
+services:
+  backend:
+    container_name: backend
+    build: ./backend
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend/models:/models
+    environment:
+      SPOTIPY_REDIRECT_URI: 'http://localhost:8888/callback/'
+
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    ports:
+      - 3000:3000
+
+  db:
+    image: postgres:13
+    ports:
+     - 5432:5432
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+    volumes:
+    #  - ./database/pg:/var/lib/postgresql
+     - ./database/create_table.sql:/docker-entrypoint-initdb.d/create_tables.sql
+     
