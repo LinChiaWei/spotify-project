@@ -19,7 +19,7 @@
   ![未命名](https://user-images.githubusercontent.com/62389828/223510787-ddfd1a5c-cdfc-480c-be07-3498a46a0f0b.png)
 
 ### Future works  
-  * fetch data automatically.
+  * Fetch data automatically.
   * Data display with different time intervals.
   * Analysis of playlists with model.
   * Recommendation system.
