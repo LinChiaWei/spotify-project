@@ -27,6 +27,7 @@ def backend():
     data = []
     # data = get_data()
     new_data = get_data()
+    # print(new_data)
     if(check):
         update_db(new_data)
     else:
