@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from models.get_data import get_data
+from models.get_data import get_data, count_song
 from models.insert_db import insert_db
 from models.update_db import update_db
 from models.check_db import check_db
@@ -24,17 +24,16 @@ app.add_middleware(
 @app.get("/")
 def backend():
     check = check_db()
-    data = []
-    # data = get_data()
     new_data = get_data()
-    # print(new_data)
-    if(check):
-        update_db(new_data)
-    else:
-        insert_db(new_data)
-
+    # if(check):
+    # update_db(new_data)
+    # else:
+    insert_db(new_data)
+    print(new_data)
     data = get_db_data()
-    return {"message": data}
+    count_data = count_song(data)
+    # print()
+    return {"message": count_data}
 
 # @app.get("/callback")
 # def backend():

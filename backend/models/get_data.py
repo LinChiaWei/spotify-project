@@ -18,11 +18,12 @@ def find_songs_name(items):
         artist_inf = album['artists']
         artist_name = artist_inf[0]['name']
 
-        day , tt = trans_time(time)
+        t = trans_time(time)
+        print(t)
 
         data.append(current_track['name'])
         data.append(album_image_url)
-        data.append(day)
+        data.append(t)
         last50songs.append(data)
 
     return last50songs
@@ -34,7 +35,7 @@ def trans_time(t):
     t = t.split('T')
     date = t[0]
     time = t[1].split('.')[0]
-    return date,time
+    return date+" "+time
 
 def get_data():
 
@@ -61,19 +62,14 @@ def get_data():
             continue
         else:
             song_count.setdefault(song_name,[])
-            # song_count[song_name].append(0)
             song_count[song_name].append(song_image_url)
             song_count[song_name].append(song_time)
 
-    # for song in last50songs:
-    #     song_name = song[0]
-    #     song_count[song_name][0] +=1
 
     for item in song_count:
         dic = {}
         dic['SongName'] = item
         dic['Cover'] = song_count[item][0]
-        # dic['Count'] = song_count[item][0]
         dic['Time'] = song_count[item][1]
         data = [item, song_count[item][0] ,song_count[item][1]]
         song_list.append(data)
@@ -81,6 +77,36 @@ def get_data():
     song_list.sort(key=take_second,reverse=True)
 
     return song_list
+
+def count_song(data):
+    song_count = {}
+    song_list = []
+    for song in data:
+        song_name = song[0]
+        song_image_url = song[1]
+        if song_name in song_count:
+            continue
+        else:
+            song_count.setdefault(song_name,[])
+            song_count[song_name].append(0)
+            song_count[song_name].append(song_image_url)
+
+    for song in data:
+        song_name = song[0]
+        song_count[song_name][0] +=1
+
+    for item in song_count:
+        dic = {}
+        dic['SongName'] = item
+        dic['Cover'] = song_count[item][1]
+        dic['Count'] = song_count[item][0]
+        data = [item, song_count[item][1] ,song_count[item][0]]
+        song_list.append(data)
+
+    song_list.sort(key=take_second,reverse=True)
+    
+    return song_list
+
 
 def get_user_inf():
     token = find_token()
