@@ -19,7 +19,7 @@ def find_songs_name(items):
         artist_name = artist_inf[0]['name']
 
         t = trans_time(time)
-        print(t)
+        # print(str(t))
 
         data.append(current_track['name'])
         data.append(album_image_url)
@@ -47,36 +47,11 @@ def get_data():
     sp = spotipy.client.Spotify(headers)
     data = sp.current_user_recently_played(50)
 
-    song_count = {}
-    song_list = []
     items =  data['items']
 
     last50songs = find_songs_name(items)
 
-    for song in last50songs:
-        # print(song)
-        song_name = song[0]
-        song_image_url = song[1]
-        song_time = song[2]
-        if song_name in song_count:
-            continue
-        else:
-            song_count.setdefault(song_name,[])
-            song_count[song_name].append(song_image_url)
-            song_count[song_name].append(song_time)
-
-
-    for item in song_count:
-        dic = {}
-        dic['SongName'] = item
-        dic['Cover'] = song_count[item][0]
-        dic['Time'] = song_count[item][1]
-        data = [item, song_count[item][0] ,song_count[item][1]]
-        song_list.append(data)
-
-    song_list.sort(key=take_second,reverse=True)
-
-    return song_list
+    return last50songs
 
 def count_song(data):
     song_count = {}

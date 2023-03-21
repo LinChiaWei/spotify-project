@@ -10,7 +10,7 @@ def update_db(new_data):
     cursor.execute("SELECT * FROM song_list;")
     print("select Table successfully")
     db_data = cursor.fetchall()
-    # updated_data = update_data(db_data,new_data)
+    updated_data = update_data(db_data,new_data)
     print("update data sucessfully")
     cursor.execute("TRUNCATE TABLE song_list;")
     print("clear table sucessfully")
