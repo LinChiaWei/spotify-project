@@ -5,14 +5,14 @@ import  menu  from '../assets/images/menu.svg';
 import { navLinks } from '../constants/index';
 
 
-export const NavBar = () => {
+export const NavBar = (props) => {
     const [active, setActive] = useState(false);
     const [toggle, setToggle] = useState('Home');
 
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
         <h1 className="text-lime-500 font-medium text-xl px-5">SPOTIFY SONG RANK</h1>
-        <ul className="list-none sm:flex hidden jusitfy-end item- flex-2">
+        <ul className="list-none sm:flex hidden jusitfy-end item- flex-1">
           {navLinks.map((nav, index) => (
             <li
               key={nav.id}
@@ -24,9 +24,13 @@ export const NavBar = () => {
             </li>))}
         </ul>
         
-        {/* <a  class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> */}
-
-        {/* </a> */}
+        <div className="ml-4 flex-2">
+            <a className="font-medium text-indigo-600 hover:text-indigo-500">
+              <img className="h-8 w-8 rounded-full" src={props.data[1]} alt="" />
+              <div>{props.data[0]}</div>
+            </a>
+        </div>
+        
       <div className="sm:hidden flex flex-1 justify-end items-center px-4">
         <img
           src={toggle ? close : menu}

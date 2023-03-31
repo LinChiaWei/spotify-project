@@ -3,8 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from models.get_data import get_data, count_song
 from models.insert_db import insert_db
 from models.check_db import check_db
+from models.get_data import get_user_info
 from models.get_db_data import get_db_data,get_db_month_data
 from models.update_data import check_duplicate
+
 
 
 
@@ -26,6 +28,7 @@ app.add_middleware(
 def backend():
     check = check_db()
     new_data = get_data()
+    user_info = get_user_info()
 
     if(check):
         old_data = get_db_data()
@@ -38,7 +41,7 @@ def backend():
 
     data = get_db_data()
     count_data = count_song(data)
-    return {"message": count_data}
+    return {"message": count_data,"user_info":user_info}
 
 @app.get("/thismonth")
 def backend():
