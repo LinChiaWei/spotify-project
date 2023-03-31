@@ -1,7 +1,7 @@
 import spotipy
 import spotipy.util as util
 from models.get_token import get_token
-from models.get_token import find_token
+# from models.get_token import find_token
 import time
 
 
@@ -83,14 +83,20 @@ def count_song(data):
     return song_list
 
 
-def get_user_inf():
-    token = find_token()
-    headers = {"Authorization": "Bearer {}".format(token)}
-    sp = spotipy.client.Spotify(headers)
-    user = sp.me()
-    print(user)
-    print(user['display_name'])
-    print(user['images'][0]['url'])
+# def get_user_inf():
+#     token = get_token()
+#     headers = {"Authorization": "Bearer {}".format(token['access_token'])}
+#     sp = spotipy.client.Spotify(headers)
+#     user = sp.me()
+#     dict = {}
+#     dict['display_name'] = user['display_name']
+#     dict['images'] = user['images'][0]['url'] 
+
+#     print(user)
+#     print(user['display_name'])
+#     print(user['images'][0]['url'])
+#     return dict
+
 
 
 

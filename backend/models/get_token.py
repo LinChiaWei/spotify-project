@@ -18,7 +18,7 @@ def get_token():
     # print(token)
     return token
 
-def find_token():
-    f = open('backend\.cache')
-    token = json.load(f)
-    return token
+# def find_token():
+#     f = open('./.cache')
+#     token = json.load(f)
+#     return token

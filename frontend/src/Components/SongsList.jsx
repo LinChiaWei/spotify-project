@@ -1,8 +1,6 @@
 import Grid from '@mui/system/Unstable_Grid';
 import { Card,Paper, CardMedia} from '@mui/material';
 import React from 'react';
-// import Marquee from "react-fast-marquee";
-
 
 export const SongsList = (props) => {
     return(
@@ -83,28 +81,5 @@ export const SongsList = (props) => {
           ))}
         </Grid>
       </div> 
-
-
-        // <div>
-        //   <Table striped bordered hover variant="dark">
-        //     <thead>
-        //       <tr>
-        //         <th> </th>
-        //         <th>Song Name</th>
-        //         <th>Listen Rank</th>
-        //       </tr>
-        //     </thead>
-        //     {props.data.map(item => (
-        //       <tbody key={item[0]}>
-        //         <tr>
-        //           <td><img style={{ height:150, width:150}} src={item[1]}></img></td>
-        //           <td>{item[0]}</td>
-        //           <td>{item[2]}</td>
-        //         </tr>
-        //       </tbody>
-        //   ))}
-        //   </Table>
-        // </div>
-
-    );
+    )
 }

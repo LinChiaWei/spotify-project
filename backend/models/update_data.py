@@ -26,7 +26,5 @@ def check_duplicate(db_data,new_data):
         if flag == False:
             result.append(i)
 
-    # for i in db_data:
-        # print(i[2])
     return result
 

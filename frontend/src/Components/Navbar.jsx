@@ -1,52 +1,57 @@
-// import { fontFamily } from "@mui/system";
+
 import { useState, useEffect } from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-// import logo from '../assets/img/Google.png';
+import  close  from '../assets/images/close.svg';
+import  menu  from '../assets/images/menu.svg';
+import { navLinks } from '../constants/index';
 
 
 export const NavBar = () => {
+    const [active, setActive] = useState(false);
+    const [toggle, setToggle] = useState('Home');
 
-    const [activeLink, setActiveLink] = useState('home');
-    const [scrolled, setScrolled] = useState(false);
-  
-    useEffect(() => {
-      const onScroll = () => {
-        if (window.scrollY > 50) {
-          setScrolled(true);
-        } else {
-          setScrolled(false);
-        }
-      }
-  
-      window.addEventListener("scroll", onScroll);
-  
-      return () => window.removeEventListener("scroll", onScroll);
-    }, [])
-  
-    const onUpdateActiveLink = (value) => {
-      setActiveLink(value);
-    }
-  
-    return (
-        <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
-          <Container>
-            <Navbar.Brand href="/">
-              <button className="title">
-                <span>Spotify Song Rank</span>
-              </button>
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav">
-              <span className="navbar-toggler-icon"></span>
-            </Navbar.Toggle>
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                {/* <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link> */}
-              </Nav>
-              {/* <span className="navbar-text">
-                  <button className="vvd"><span>Let's Connect</span></button>
-              </span> */}
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+  return (
+    <nav className="w-full flex py-6 justify-between items-center navbar">
+        <h1 className="text-lime-500 font-medium text-xl px-5">SPOTIFY SONG RANK</h1>
+        <ul className="list-none sm:flex hidden jusitfy-end item- flex-2">
+          {navLinks.map((nav, index) => (
+            <li
+              key={nav.id}
+              className={`font-poppings font-nrmal cursor-pointer font-medium text-[16px] ${index === navLinks.length-1 ? 'mr-0':'mr-10'} text-white mr-10`}
+            >
+              <a href={`${nav.id}`}>
+                {nav.title}
+              </a>
+            </li>))}
+        </ul>
+        
+        {/* <a  class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> */}
+
+        {/* </a> */}
+      <div className="sm:hidden flex flex-1 justify-end items-center px-4">
+        <img
+          src={toggle ? close : menu}
+          alt="menu"
+          className="w-[28px] h-[28px] object-contain"
+          onClick={() => setToggle(!toggle)}
+        />
+
+        <div className={`${!toggle ? "hidden" : "flex"} p-8 bg-black absolute top-20 right-0 mx-4 my-0 min-w-[140px] z-50 rounded-xl sidebar`}>
+          <ul className="list-none flex justify-end items-start flex-1 flex-col">
+            {navLinks.map((nav, index) => (
+              <li
+                key={nav.id}
+                className={`font-poppins font-medium cursor-pointer text-[16px] ${
+                  active === nav.title ? "text-white" : "text-gray-500"
+                } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
+                onClick={() => setActive(nav.title)}
+              >
+                <a href={`${nav.id}`}>{nav.title}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+    </nav>
     )
   }
