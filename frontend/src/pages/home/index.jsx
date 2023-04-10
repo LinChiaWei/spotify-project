@@ -6,7 +6,7 @@ import { SongsList } from '../../components/SongsList';
 import styles from '../../styles';
 
 
-let url = 'http://localhost:8000/'
+let url = 'http://localhost:8000/home'
 
 export const Login = () => {
     const SongsCount = GetSongs(url);
@@ -22,7 +22,7 @@ export const Login = () => {
             </div>
                 <div className={`bg-gradient-to-t bg-slate-900 ${styles.paddingX} ${styles.flexStart}`}>
                     <div className={`${styles.boxWidth}`}>
-                        <SongsList data={SongsCount} />
+                        {/* <SongsList data={SongsCount} /> */}
                 </div>
             </div>
         </div>

@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+@app.get("/home")
 def backend():
     check = check_db()
     new_data = get_data()
