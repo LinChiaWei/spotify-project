@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/home")
+@app.get("/")
 def backend():
     check = check_db()
     new_data = get_data()
@@ -32,7 +32,6 @@ def backend():
 
     if(check):
         old_data = get_db_data()
-        # print(old_data)
         data_in = check_duplicate(old_data,new_data)
         print(data_in)
         insert_db(data_in)
