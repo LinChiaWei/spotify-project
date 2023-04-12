@@ -46,14 +46,16 @@ def backend():
 def backend():
     data = get_db_month_data()
     count_data = count_song(data)
-
-    return {"message": count_data}
+    user_info = get_user_info()
+    print(user_info)
+    return {"message": count_data,"user_info":user_info}
     
 
 @app.get("/lastmonth")
 def backend():
     data = get_db_month_data()
     count_data = count_song(data)
-
-    return {"message": count_data}
+    user_info = get_user_info()
+    print(user_info)
+    return {"message": count_data,"user_info":user_info}
     

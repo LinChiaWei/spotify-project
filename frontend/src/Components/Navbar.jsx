@@ -25,40 +25,42 @@ export const NavBar = (props) => {
 
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
-        <h1 className="text-lime-500 font-medium text-xl px-5">SPOTIFY SONG RANK</h1>
+        <h1 className="text-lime-500 font-medium text-2xl px-5 tracking-tighter">SPOTIFY SONG RANK</h1>
         <ul className="list-none sm:flex hidden jusitfy-end items-center flex-1">
           {navLinks.map((nav, index) => (
             <li
               key={nav.id}
-              className={`font-poppings font-nrmal cursor-pointer font-medium text-lg text-[16px] ${index === navLinks.length-1 ? 'mr-0':'mr-10'} text-white mr-10`}
+              className={`font-poppings font-nrmal cursor-pointer font-medium text-lg text-[16px] ${index === navLinks.length-1 ? 'mr-0':'mr-8'} text-gray-200 mr-10`}
             >
               <a href={`${nav.id}`}>
                 {nav.title}
               </a>
             </li>))}
-            <div className="flex flex-wrap px-2 -z-0">
-              <div className="font-medium px-4">
-                <h1 className="text-white text-center mb-2 ">Start Date</h1>
+            <div className="relative flex flex-wrap px-2 -mt-4">
+              <div className="font-medium px-4 ">
+                <h1 className="text-gray-100 text-center mb-2">Start Date</h1>
                 <DatePick selectDate={selectStartDate}/>
               </div>
-              <div className= "font-medium px-4">
-                <h1 className="text-white text-center mb-2 ">End date</h1>
+              <div className= "font-medium px-4 ">
+                <h1 className="text-gray-100 text-center mb-2">End date</h1>
                 <DatePick selectDate={selectEndDate}/>
               </div>
             </div>
-            <div className="px-4 content-center">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  border-blue-700 rounded">
+            <div className="px-1 content-center">
+                <button className=" bg-slate-700 hover:bg-gray-600 text-slate-300 font-bold py-2 px-3  border-blue-700 rounded"
+                onClick={(startDate,endDate)=> props.selectDate()}>
                   GO
                 </button>
             </div>
         </ul>
 
-        <div className="ml-4 flex-2">
-            <a className="font-medium text-indigo-600 hover:text-indigo-500">
-              <img className="h-8 w-8 rounded-full" src={props.data[1]} alt="" />
-              <div>{props.data[0]}</div>
-            </a>
+        <div className="inline-flex items-center px-1 py-2.5 text-sm font-medium text-center text-white">
+            <img className="h-10 w-10 rounded-full" src={props.data[1]} />
+              <div className="px-2 font-sans font-bold text-lg">
+                {props.data[0]}
+              </div>
         </div>
+
         
       <div className="sm:hidden flex flex-1 justify-end items-center px-4">
         <img
@@ -79,7 +81,9 @@ export const NavBar = (props) => {
                 onClick={() => setActive(nav.title)}
               >
                 <a href={`${nav.id}`}>{nav.title}</a>
+                
               </li>
+              
             ))}
           </ul>
         </div>
