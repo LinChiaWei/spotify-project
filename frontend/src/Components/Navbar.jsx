@@ -13,14 +13,14 @@ export const NavBar = (props) => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
 
-
+    
     const selectStartDate = (date) => {
       setStartDate(date)
-      console.log(date)
+      // console.log(date)
     }
     const selectEndDate = (date) => {
       setEndDate(date)
-      console.log(date)
+      // console.log(date)
     }
 
   return (
@@ -47,8 +47,8 @@ export const NavBar = (props) => {
               </div>
             </div>
             <div className="px-1 content-center">
-                <button className=" bg-slate-700 hover:bg-gray-600 text-slate-300 font-bold py-2 px-3  border-blue-700 rounded"
-                onClick={(startDate,endDate)=> props.selectDate()}>
+                <button type="button" className="bg-slate-700 hover:bg-gray-600 text-slate-300 font-bold py-2 px-3  border-blue-700 rounded"
+                onClick={()=> props.select(startDate,endDate)}>
                   GO
                 </button>
             </div>

@@ -6,7 +6,7 @@ export const SongsList = (props) => {
     return(
         <div className="mt-4 grid grid-cols-2 gap-x-24 gap-y-5 sm:grid-cols-3 lg:grid-cols-4 xl:gap-x-5 drop-shadow-md">
         {props.data.map((item, index) => ( 
-          <div className="rounded-lg bg-black bg-opacity-20 object-contain p-3 " >
+          <div className="rounded-lg bg-black bg-opacity-20 object-contain p-3" key={item[0]}>
             <div className="" >
               <div className="tracking-wide text-center font-semibold text-3xl text-red-700 mb-1">
                 Rank {index+1}

@@ -1,7 +1,6 @@
 import spotipy
 import spotipy.util as util
 from models.get_token import get_token
-# from models.get_token import find_token
 import time
 
 
@@ -41,8 +40,6 @@ def get_data():
 
     token = get_token()
     headers = {"Authorization": "Bearer {}".format(token['access_token'])}
-    # headers = {"Authorization": "Bearer {}".format(token)}
-    # print(headers)
 
     sp = spotipy.client.Spotify(headers)
     data = sp.current_user_recently_played(50)
@@ -92,10 +89,6 @@ def get_user_info():
     l.append(user['display_name'])
     l.append(user['images'][0]['url'] )
 
-    print(l)
-    # print(user)
-    # print(user['display_name'])
-    # print(user['images'][0]['url'])
     return l
 
 

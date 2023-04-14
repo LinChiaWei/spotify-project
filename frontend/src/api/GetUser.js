@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function GetUser(url) {
+export function GetUser(url,start,end) {
     const [list, setData] = useState([]);
 
     useEffect(() => {
