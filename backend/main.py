@@ -25,15 +25,15 @@ app.add_middleware(
 )
 
 @app.on_event("startup")
-@repeat_every(seconds=60 * 60)  # 1 hour
+@repeat_every(seconds=60*60)  # 1 hour
 def update_data():
     check = check_db()
     new_data = get_data()
-
-    print(new_data)
+    # print(new_data)
 
     if(check):
         old_data = get_db_data()
+        # print(old_data)
         data_in = check_duplicate(old_data,new_data)
         print(data_in)
         insert_db(data_in)
@@ -43,7 +43,7 @@ def update_data():
 
 
 @app.get("/")
-def get_data(start_date:str=None,end_date:str=None):
+def Home_get(start_date:str=None,end_date:str=None):
     # check = check_db()
     # new_data = get_data()
     # print(new_data)
@@ -63,7 +63,7 @@ def get_data(start_date:str=None,end_date:str=None):
     return {"message": count_data,"user_info":user_info}
 
 @app.get("/thismonth")
-def get_this_month_data(start_date:str=None,end_date:str=None):
+def This_month_data(start_date:str=None,end_date:str=None):
 
     data = get_db_month_data(start_date,end_date)
     count_data = count_song(data)
@@ -73,7 +73,7 @@ def get_this_month_data(start_date:str=None,end_date:str=None):
     
 
 @app.get("/lastmonth")
-def get_last_month_data(start_date:str=None,end_date:str=None):
+def Last_month_data(start_date:str=None,end_date:str=None):
 
     data = get_db_month_data(start_date,end_date)
     count_data = count_song(data)
