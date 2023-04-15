@@ -29,11 +29,9 @@ app.add_middleware(
 def update_data():
     check = check_db()
     new_data = get_data()
-    # print(new_data)
 
     if(check):
         old_data = get_db_data()
-        # print(old_data)
         data_in = check_duplicate(old_data,new_data)
         print(data_in)
         insert_db(data_in)
@@ -44,40 +42,26 @@ def update_data():
 
 @app.get("/")
 def Home_get(start_date:str=None,end_date:str=None):
-    # check = check_db()
-    # new_data = get_data()
-    # print(new_data)
     user_info = get_user_info()
-
-    # new_data = []
-    # if(check):
-    #     old_data = get_db_data()
-    #     data_in = check_duplicate(old_data,new_data)
-    #     print(data_in)
-    #     insert_db(data_in)
-    # else:
-    #     insert_db(new_data)
-
     data = get_db_data(start_date,end_date)
     count_data = count_song(data)
     return {"message": count_data,"user_info":user_info}
 
 @app.get("/thismonth")
 def This_month_data(start_date:str=None,end_date:str=None):
-
+    user_info = get_user_info()
     data = get_db_month_data(start_date,end_date)
     count_data = count_song(data)
-    user_info = get_user_info()
-    print(user_info)
+
+
     return {"message": count_data,"user_info":user_info}
     
 
 @app.get("/lastmonth")
 def Last_month_data(start_date:str=None,end_date:str=None):
-
+    user_info = get_user_info()
     data = get_db_month_data(start_date,end_date)
     count_data = count_song(data)
-    user_info = get_user_info()
-    print(user_info)
+
     return {"message": count_data,"user_info":user_info}
     

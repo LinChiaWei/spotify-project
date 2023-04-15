@@ -13,7 +13,7 @@ def get_db_data(start_date=None,end_date=None):
 
     rows = cursor.fetchall()
     connection.close()
-
+    
     return rows
 
 def get_db_month_data(start_date=None,end_date=None):

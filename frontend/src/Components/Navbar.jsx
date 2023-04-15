@@ -13,14 +13,12 @@ export const NavBar = (props) => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
 
-    
+
     const selectStartDate = (date) => {
       setStartDate(date)
-      // console.log(date)
     }
     const selectEndDate = (date) => {
       setEndDate(date)
-      // console.log(date)
     }
 
   return (

@@ -1,5 +1,5 @@
 /backend/.cache
-/backend/get_token.py
+/backend/models/get_token.py
 /log
 /spotify_crawler.ipynb
 /track_image.ipynb

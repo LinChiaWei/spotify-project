@@ -16,6 +16,5 @@ export const DatePick = (props) => {
             }}
         />
         </div>
-        // <input type="date" onChange={e=>props.Date=e.target.value} />
     )
 }

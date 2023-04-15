@@ -10,7 +10,6 @@ export const Login = () => {
     const[songs, setSongs] = useState([]);
     const[userInfo, setUserInfo] = useState([]);
 
-
     const dateTransform = (date) => {
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
@@ -18,7 +17,6 @@ export const Login = () => {
         let dateString = `${year}-${month}-${dt}`;
         return dateString;
     }
-
 
     const songsApi = async(url, dateString) => {
         const response  = await fetch(`${url}${dateString}`, {
