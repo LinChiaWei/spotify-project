@@ -12,15 +12,15 @@
   * Get user's information from Apis.  
   * Store data into database.  
   * Get data from database.  
+  * Fetch data automatically.
 #### Frontend
   * Connect the server and get data.
   * Display the data on the website. 
+  * Data display with different time intervals.
     
-  ![未命名](https://user-images.githubusercontent.com/62389828/223510787-ddfd1a5c-cdfc-480c-be07-3498a46a0f0b.png)
+![image](https://user-images.githubusercontent.com/62389828/232190203-0f48cb90-76ec-445c-b0f9-e3571687813b.png)
 
 ### Future works  
-  * Fetch data automatically.
-  * Data display with different time intervals.
   * Analysis of playlists with model.
   * Recommendation system.
   
