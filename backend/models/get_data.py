@@ -1,7 +1,7 @@
 import spotipy
 import spotipy.util as util
 from models.get_token import get_token
-from models.get_token import find_token
+import time
 
 
 def find_songs_name(items):
@@ -9,14 +9,20 @@ def find_songs_name(items):
     for i in range(len(items)):
         data = []
         current_track = items[i]['track']
+        time = items[i]['played_at']
         album = current_track['album']
         album_name = album['name']
         album_image_inf = album['images'][1]
         album_image_url = album_image_inf['url']
         artist_inf = album['artists']
         artist_name = artist_inf[0]['name']
+
+        t = trans_time(time)
+        # print(str(t))
+
         data.append(current_track['name'])
         data.append(album_image_url)
+        data.append(t)
         last50songs.append(data)
 
     return last50songs
@@ -24,23 +30,30 @@ def find_songs_name(items):
 def take_second(list):
     return list[2]
 
+def trans_time(t):
+    t = t.split('T')
+    date = t[0]
+    time = t[1].split('.')[0]
+    return date+" "+time
+
 def get_data():
-    song_count = {}
-    song_list = []
+
     token = get_token()
-    headers = {"Authorization": "Bearer {}".format(token)}
-    # print(headers)
+    headers = {"Authorization": "Bearer {}".format(token['access_token'])}
 
     sp = spotipy.client.Spotify(headers)
-
     data = sp.current_user_recently_played(50)
-    items =  data['items']
 
+    items =  data['items']
 
     last50songs = find_songs_name(items)
 
-    for song in last50songs:
-        # print(song)
+    return last50songs
+
+def count_song(data):
+    song_count = {}
+    song_list = []
+    for song in data:
         song_name = song[0]
         song_image_url = song[1]
         if song_name in song_count:
@@ -50,8 +63,7 @@ def get_data():
             song_count[song_name].append(0)
             song_count[song_name].append(song_image_url)
 
-
-    for song in last50songs:
+    for song in data:
         song_name = song[0]
         song_count[song_name][0] +=1
 
@@ -64,14 +76,24 @@ def get_data():
         song_list.append(data)
 
     song_list.sort(key=take_second,reverse=True)
-
+    
     return song_list
 
-def get_user_inf():
-    token = find_token()
-    headers = {"Authorization": "Bearer {}".format(token)}
+
+def get_user_info():
+    token = get_token()
+    headers = {"Authorization": "Bearer {}".format(token['access_token'])}
     sp = spotipy.client.Spotify(headers)
     user = sp.me()
-    print(user)
-    print(user['display_name'])
-    print(user['images'][0]['url'])
+    l = []
+    l.append(user['display_name'])
+    l.append(user['images'][0]['url'] )
+
+    return l
+
+
+
+
+
+
+    
