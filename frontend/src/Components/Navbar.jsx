@@ -22,8 +22,8 @@ export const NavBar = (props) => {
     }
 
   return (
-    <nav className="w-full flex py-6 justify-between items-center navbar">
-        <h1 className="text-lime-500 font-medium text-2xl px-5 tracking-tighter">SPOTIFY SONG RANK</h1>
+    <nav className="w-full flex justify-between items-center navbar pt-3">
+        <h1 className="text-lime-400 font-medium text-2xl px-5 tracking-tighter">SPOTIFY SONG RANK</h1>
         <ul className="list-none sm:flex hidden jusitfy-end items-center flex-1">
           {navLinks.map((nav, index) => (
             <li
