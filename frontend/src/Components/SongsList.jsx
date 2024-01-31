@@ -13,16 +13,19 @@ export const SongsList = (props) => {
               </div>
             </div>
             <div className="bg-black static ">                  
-              <img className="aspect-square object-contain rounded-sm" src={item[1]}/>
+              <img className="aspect-square object-contain rounded-sm" src={item[2]}/>
             </div>
             <div className="p-2">
               <div className="tracking-wide font-center font-bold text-gray-100 truncate">
                 {item[0]}
               </div>
+              <div className="tracking-wide font-center text-gray-100 truncate">
+                {item[1]}
+              </div>
             </div>
             <div className="pt-2 px-2">
               <div className="tracking-tight pt-2 pb-3 font-center text-sm text-gray-300 font-mono">
-                Song Count: {item[2]}
+                Song Count: {item[3]}
               </div>
             </div>
           </div>

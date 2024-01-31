@@ -28,6 +28,12 @@ app.add_middleware(
 @repeat_every(seconds=60*60)  # 1 hour
 def update_data():
     check = check_db()
+
+    # if check():
+    #     print("Database connection successful.")
+    # else:
+    #     print("Database connection failed.")
+
     new_data = get_data()
 
     if(check):

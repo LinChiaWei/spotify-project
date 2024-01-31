@@ -5,7 +5,7 @@ def insert_db(data):
         connection = psycopg2.connect(database="postgres",user="postgres",password="postgres",host="127.0.0.1",port='5432')
 
         cursor = connection.cursor()
-        cursor.executemany("INSERT INTO song_list (song_name, image_url, day_) VALUES(%s, %s, %s)", data)
+        cursor.executemany("INSERT INTO song_list (song_name, artist, image_url, timestamp_column) VALUES(%s, %s, %s, %s)", data)
  
         print("Insert Table successfully")
         

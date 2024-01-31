@@ -18,9 +18,9 @@ def find_songs_name(items):
         artist_name = artist_inf[0]['name']
 
         t = trans_time(time)
-        # print(str(t))
 
         data.append(current_track['name'])
+        data.append(artist_name)
         data.append(album_image_url)
         data.append(t)
         last50songs.append(data)
@@ -54,13 +54,16 @@ def count_song(data):
     song_count = {}
     song_list = []
     for song in data:
+        # print(song)
         song_name = song[0]
-        song_image_url = song[1]
+        artist_name =  song[1]
+        song_image_url = song[2]
         if song_name in song_count:
             continue
         else:
             song_count.setdefault(song_name,[])
             song_count[song_name].append(0)
+            song_count[song_name].append(artist_name)
             song_count[song_name].append(song_image_url)
 
     for song in data:
@@ -70,14 +73,16 @@ def count_song(data):
     for item in song_count:
         dic = {}
         dic['SongName'] = item
-        dic['Cover'] = song_count[item][1]
+        dic['Artist'] = song_count[item][1]
+        dic['Cover'] = song_count[item][2]
         dic['Count'] = song_count[item][0]
-        data = [item, song_count[item][1] ,song_count[item][0]]
+        data = [item, song_count[item][1] ,song_count[item][2],song_count[item][0]]
         song_list.append(data)
 
     song_list.sort(key=take_second,reverse=True)
     
     return song_list
+
 
 
 def get_user_info():
@@ -90,6 +95,7 @@ def get_user_info():
     l.append(user['images'][0]['url'] )
 
     return l
+    
 
 
 

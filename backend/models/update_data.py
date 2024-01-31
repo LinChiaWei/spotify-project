@@ -1,7 +1,7 @@
 import datetime
 
 def take_second(list):
-    return list[2]
+    return list[3]
 
 def update_data(db_data,new_data):
     data_list = list(map(list,db_data))
