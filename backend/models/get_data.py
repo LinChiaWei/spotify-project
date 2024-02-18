@@ -2,6 +2,7 @@ import spotipy
 import spotipy.util as util
 from models.get_token import get_token
 import time
+import requests as rq
 
 
 def find_songs_name(items):
@@ -16,25 +17,34 @@ def find_songs_name(items):
         album_image_url = album_image_inf['url']
         artist_inf = album['artists']
         artist_name = artist_inf[0]['name']
+        artist_uri = artist_inf[0]['uri'].split(":", 2)[2]
 
         t = trans_time(time)
+        # print(str(t))
 
         data.append(current_track['name'])
         data.append(artist_name)
         data.append(album_image_url)
         data.append(t)
+        data.append(artist_uri)
         last50songs.append(data)
 
     return last50songs
     
 def take_second(list):
-    return list[2]
+    return list[3]
 
 def trans_time(t):
     t = t.split('T')
     date = t[0]
     time = t[1].split('.')[0]
     return date+" "+time
+
+def get_artist_genres(artist_id,headers):
+    URL = 'https://api.spotify.com/v1/artists/{}'.format(artist_id)
+    output = rq.get(URL,headers=headers).json()
+    return output['genres']
+
 
 def get_data():
 
@@ -47,6 +57,9 @@ def get_data():
     items =  data['items']
 
     last50songs = find_songs_name(items)
+
+    for song in last50songs[:]:
+        song[-1] = get_artist_genres(song[-1],headers=headers)
 
     return last50songs
 
@@ -82,7 +95,6 @@ def count_song(data):
     song_list.sort(key=take_second,reverse=True)
     
     return song_list
-
 
 
 def get_user_info():

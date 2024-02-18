@@ -19,26 +19,37 @@ def check_db():
             SELECT EXISTS (
                 SELECT 1
                 FROM information_schema.tables
-                WHERE table_name = 'song_list'
+                WHERE table_name = 'listened_list'
             );
         """)
 
         table_exists = cursor.fetchone()[0]
 
         if table_exists:
-            print("Table 'song_list' already exists.")
+            print("Table 'listened_list' already exists.")
         else:
-            print("Table 'song_list' does not exist. Creating...")
+            print("Table 'listened_list' does not exist. Creating...")
 
             cursor.execute("""
-                CREATE TABLE IF NOT EXISTS song_list (
+                CREATE TABLE IF NOT EXISTS listened_list (
+                    song_id SERIAL PRIMARY KEY,
                     song_name TEXT NOT NULL,
                     artist TEXT NOT NULL,
                     image_url TEXT NOT NULL,
                     timestamp_column TIMESTAMP NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS genres (
+                    genre_id SERIAL PRIMARY KEY,
+                    genre TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS song_genre (
+                    song_id INT,
+                    genre_id INT,
+                    FOREIGN KEY (song_id) REFERENCES listened_list(song_id),
+                    FOREIGN KEY (genre_id) REFERENCES genres(genre_id)
+                );
             """)
-            print("Table 'song_list' created successfully.")
+            print("Table 'listened_list' created successfully.")
 
         cursor.close()
         connection.close()

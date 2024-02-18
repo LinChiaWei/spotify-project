@@ -6,9 +6,9 @@ def get_db_data(start_date=None,end_date=None):
     cursor = connection.cursor()
 
     if start_date != None and end_date != None:
-        cursor.execute("SELECT * FROM song_list WHERE timestamp_column BETWEEN %s AND %s;",(start_date,end_date))
+        cursor.execute("SELECT (song_name, artist, image_url, timestamp_column) FROM listened_list WHERE timestamp_column BETWEEN %s AND %s;",(start_date,end_date))
     else:
-        cursor.execute("SELECT * FROM song_list;")
+        cursor.execute("SELECT song_name, artist, image_url, timestamp_column FROM listened_list;")
 
 
     rows = cursor.fetchall()
@@ -22,9 +22,9 @@ def get_db_month_data(start_date=None,end_date=None):
     cursor = connection.cursor()
 
     if start_date != None and end_date != None:
-        cursor.execute("SELECT * FROM song_list WHERE timestamp_column BETWEEN %s AND %s;",(start_date,end_date))
+        cursor.execute("SELECT * FROM listened_list WHERE timestamp_column BETWEEN %s AND %s;",(start_date,end_date))
     else:
-        cursor.execute("SELECT * FROM song_list WHERE timestamp_column >= date_trunc('month', CURRENT_DATE);")    
+        cursor.execute("SELECT * FROM listened_list WHERE timestamp_column >= date_trunc('month', CURRENT_DATE);")    
     
     rows = cursor.fetchall()
     connection.close()

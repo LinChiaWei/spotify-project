@@ -10,6 +10,7 @@ from models.get_db_data import get_db_data,get_db_month_data
 from models.update_data import check_duplicate
 
 
+
 app = FastAPI()
 
 origins = [
@@ -25,15 +26,9 @@ app.add_middleware(
 )
 
 @app.on_event("startup")
-@repeat_every(seconds=60*60)  # 1 hour
+@repeat_every(seconds=60*90)  # 1 hour
 def update_data():
     check = check_db()
-
-    # if check():
-    #     print("Database connection successful.")
-    # else:
-    #     print("Database connection failed.")
-
     new_data = get_data()
 
     if(check):
@@ -58,8 +53,6 @@ def This_month_data(start_date:str=None,end_date:str=None):
     user_info = get_user_info()
     data = get_db_month_data(start_date,end_date)
     count_data = count_song(data)
-
-
     return {"message": count_data,"user_info":user_info}
     
 

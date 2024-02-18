@@ -1,6 +1,6 @@
 import datetime
 
-def take_second(list):
+def sort_data(list):
     return list[3]
 
 def update_data(db_data,new_data):
@@ -11,7 +11,7 @@ def update_data(db_data,new_data):
         else:
             data_list.append(i)
 
-    data_list.sort(key=take_second,reverse=True)
+    data_list.sort(key=sort_data,reverse=True)
     return data_list
 
 def check_duplicate(db_data,new_data):
@@ -20,11 +20,14 @@ def check_duplicate(db_data,new_data):
     for i in new_data:
         flag = False
         for j in db_data:
-            if i[2] == str(j[2]):
+
+            print(str(j[3]))
+            if i[3] == str(j[3]):
                 flag = True
                 break
         if flag == False:
             result.append(i)
-
+    if(len(result) > 0):
+        print("No data to update")
     return result
 
