@@ -10,10 +10,12 @@ export const DatePick = (props) => {
         <DatePicker 
             dateFormat="dd/MM/yyyy"
             selected = {date}
+            maxDate={new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())}
             onChange={(date) => {
                 setDate(date)
                 props.selectDate(date)
             }}
+           
         />
         </div>
     )
