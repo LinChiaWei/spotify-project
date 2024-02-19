@@ -5,4 +5,5 @@
 /track_image.ipynb
 /test.ipynb
 /.cache
-
+/backend/models/.cache
+/backend/models/test.ipynb

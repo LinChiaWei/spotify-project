@@ -8,6 +8,7 @@ from models.check_db import check_db
 from models.get_data import get_user_info
 from models.get_db_data import get_db_data,get_db_month_data
 from models.update_data import check_duplicate
+from datetime import datetime
 
 
 app = FastAPI()
@@ -25,11 +26,10 @@ app.add_middleware(
 )
 
 @app.on_event("startup")
-@repeat_every(seconds=60*60)  # 1 hour
+@repeat_every(seconds=60*90)  # 1 hour
 def update_data():
     check = check_db()
     new_data = get_data()
-
     if(check):
         old_data = get_db_data()
         data_in = check_duplicate(old_data,new_data)
@@ -50,17 +50,17 @@ def Home_get(start_date:str=None,end_date:str=None):
 @app.get("/thismonth")
 def This_month_data(start_date:str=None,end_date:str=None):
     user_info = get_user_info()
-    data = get_db_month_data(start_date,end_date)
+    data = get_db_month_data("this")
+    
     count_data = count_song(data)
-
-
+    print(count_data)
     return {"message": count_data,"user_info":user_info}
     
 
 @app.get("/lastmonth")
 def Last_month_data(start_date:str=None,end_date:str=None):
     user_info = get_user_info()
-    data = get_db_month_data(start_date,end_date)
+    data = get_db_month_data("last")
     count_data = count_song(data)
 
     return {"message": count_data,"user_info":user_info}
