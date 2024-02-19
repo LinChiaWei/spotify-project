@@ -20,8 +20,6 @@ def check_duplicate(db_data,new_data):
     for i in new_data:
         flag = False
         for j in db_data:
-
-            print(str(j[3]))
             if i[3] == str(j[3]):
                 flag = True
                 break
