@@ -1,6 +1,5 @@
 import psycopg2
 from models.get_data import get_data
-from models.update_db import update_data
 
 def check_db():
     try:
@@ -34,7 +33,7 @@ def check_db():
                 CREATE TABLE IF NOT EXISTS listened_list (
                     song_id SERIAL PRIMARY KEY,
                     song_name TEXT NOT NULL,
-                    artist TEXT NOT NULL,
+                    artist_id INT NOT NULL,
                     image_url TEXT NOT NULL,
                     timestamp_column TIMESTAMP NOT NULL
                 );
@@ -47,6 +46,11 @@ def check_db():
                     genre_id INT,
                     FOREIGN KEY (song_id) REFERENCES listened_list(song_id),
                     FOREIGN KEY (genre_id) REFERENCES genres(genre_id)
+                );
+                CREATE TABLE IF NOT EXISTS artist (
+                    artist_id SERIAL PRIMARY KEY,
+                    artist_name TEXT NOT NULL,
+                    img_url TEXT NOT NULL
                 );
             """)
             print("Table 'listened_list' created successfully.")

@@ -16,11 +16,11 @@ def update_data(db_data,new_data):
 
 def check_duplicate(db_data,new_data):
     result = []
-
+    flag = False
+    
     for i in new_data:
-        flag = False
         for j in db_data:
-            if i[3] == str(j[3]):
+            if i[3] == str(j[4]):
                 flag = True
                 break
         if flag == False:

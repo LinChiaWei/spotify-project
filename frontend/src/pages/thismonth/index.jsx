@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavBar } from '../../components/Navbar'
 import { SongsList } from '../../components/SongsList'
 import styles from '../../styles'
+import { renderDefaultPage } from '../../components/DefaultPage';
 
 let url = 'http://localhost:8000/thismonth'
 
@@ -65,17 +66,21 @@ export const ThisMonth = () => {
 
 
     return(
-        <div className={`bg-black w-full overflow-hidden`}>
+        <div className={`bg-black w-full overflow-hidden `}>
             <div className={`${styles.flexCenter}`}>
                 <div className={`w-full bg-gradient-to-r bg-slate-900`}>
                     <NavBar data={userInfo} select={selectspecificDate}/>
                 </div>
             </div>
-                <div className={`bg-gradient-to-t bg-slate-900 ${styles.paddingX} ${styles.flexStart}`}>
-                    <div className={`${styles.boxWidth}`}>
+            <div className={`bg-gradient-to-t h-dvh  bg-slate-900 ${styles.paddingX} ${styles.flexStart}`}>
+                <div className={`${styles.boxWidth} `}>
+                    {songs && songs.length > 0 ? (
                         <SongsList data={songs} />
+                    ) : (
+                        renderDefaultPage()
+                    )}
                 </div>
             </div>
         </div>
-    )
+    );
 }

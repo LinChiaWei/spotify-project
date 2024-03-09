@@ -13,14 +13,13 @@ def find_songs_name(items):
         time = items[i]['played_at']
         album = current_track['album']
         album_name = album['name']
-        album_image_inf = album['images'][1]
+        album_image_inf = album['images'][0]
         album_image_url = album_image_inf['url']
         artist_inf = album['artists']
         artist_name = artist_inf[0]['name']
         artist_uri = artist_inf[0]['uri'].split(":", 2)[2]
 
         t = trans_time(time)
-        # print(str(t))
 
         data.append(current_track['name'])
         data.append(artist_name)
@@ -40,14 +39,14 @@ def trans_time(t):
     time = t[1].split('.')[0]
     return date+" "+time
 
-def get_artist_genres(artist_id,headers):
+def get_artist_info(artist_id,headers):
     URL = 'https://api.spotify.com/v1/artists/{}'.format(artist_id)
+    # output = rq.get(URL,headers=headers).headers
     output = rq.get(URL,headers=headers).json()
-    return output['genres']
+    return output
 
 
 def get_data():
-
     token = get_token()
     headers = {"Authorization": "Bearer {}".format(token['access_token'])}
 
@@ -59,7 +58,9 @@ def get_data():
     last50songs = find_songs_name(items)
 
     for song in last50songs[:]:
-        song[-1] = get_artist_genres(song[-1],headers=headers)
+        info = get_artist_info(song[-1],headers)
+        song[-1] = info['images'][0]['url']
+        song.append(info['genres'])
 
     return last50songs
 
@@ -70,13 +71,15 @@ def count_song(data):
         # print(song)
         song_name = song[0]
         artist_name =  song[1]
-        song_image_url = song[2]
+        artist_img_url =  song[2]
+        song_image_url = song[3]
         if song_name in song_count:
             continue
         else:
             song_count.setdefault(song_name,[])
             song_count[song_name].append(0)
             song_count[song_name].append(artist_name)
+            song_count[song_name].append(artist_img_url)
             song_count[song_name].append(song_image_url)
 
     for song in data:
@@ -87,9 +90,10 @@ def count_song(data):
         dic = {}
         dic['SongName'] = item
         dic['Artist'] = song_count[item][1]
-        dic['Cover'] = song_count[item][2]
+        dic['ArtistImg'] = song_count[item][2]
+        dic['Cover'] = song_count[item][3]
         dic['Count'] = song_count[item][0]
-        data = [item, song_count[item][1] ,song_count[item][2],song_count[item][0]]
+        data = [item, song_count[item][1],song_count[item][2],song_count[item][3],song_count[item][0]]
         song_list.append(data)
 
     song_list.sort(key=take_second,reverse=True)
