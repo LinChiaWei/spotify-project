@@ -18,7 +18,7 @@
   * Display the data on the website. 
   * Data display with different time intervals.
     
-![image](https://user-images.githubusercontent.com/62389828/232190203-0f48cb90-76ec-445c-b0f9-e3571687813b.png)
+![image](https://github.com/LinChiaWei/spotify_project/assets/62389828/16ce624d-34a9-4629-a7f8-3e072f43e92f)
 
 ### Future works  
   * Analysis of playlists with model.
