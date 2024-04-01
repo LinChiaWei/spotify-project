@@ -31,7 +31,7 @@ def find_songs_name(items):
     return last50songs
     
 def take_second(list):
-    return list[3]
+    return list[4]
 
 def trans_time(t):
     t = t.split('T')

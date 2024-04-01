@@ -3,6 +3,7 @@ import { NavBar } from '../../components/Navbar'
 import { SongsList } from '../../components/SongsList'
 import styles from '../../styles'
 import { renderDefaultPage } from '../../components/DefaultPage';
+import { Tabs } from '../../components/Tabs';
 
 let url = 'http://localhost:8000/lastmonth'
 
@@ -56,6 +57,7 @@ export const LastMonth = () => {
 
     useEffect(() => {
         songsApi(url, '')
+
         .then(data => {
             setSongs(data["message"]);
             setUserInfo(data["user_info"]);
@@ -70,6 +72,9 @@ export const LastMonth = () => {
                 <div className={`w-full bg-gradient-to-r bg-slate-900`}>
                     <NavBar data={userInfo} select={selectspecificDate}/>
                 </div>
+            </div>
+            <div className='w-full bg-gradient-to-r bg-slate-900'>
+                <Tabs />    
             </div>
             <div className={`bg-gradient-to-t h-dvh  bg-slate-900 ${styles.paddingX} ${styles.flexStart}`}>
                 <div className={`${styles.boxWidth} `}>

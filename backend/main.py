@@ -25,6 +25,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+swagger_ui_default_parameters = {
+    "dom_id": "#swagger-ui",
+    "layout": "BaseLayout",
+    "deepLinking": True,
+    "showExtensions": True,
+    "showCommonExtensions": True,
+}
+
 @app.on_event("startup")
 @repeat_every(seconds=60*90)  # 1 hour
 def update_data():
@@ -35,19 +43,27 @@ def update_data():
         old_data = get_db_data()
         # print(old_data)
         data_in = check_duplicate(old_data,new_data)
-        # print(data_in)
+        print(data_in)
         insert_db(data_in)
     else:
         insert_db(new_data)
 
 
 
-@app.get("/")
+@app.get("/songs")
 def Home_get(start_date:str=None,end_date:str=None):
     user_info = get_user_info()
-    data = get_db_data(start_date,end_date)
-    print(data)
-    count_data = count_song(data)
+    song_Data = get_db_data(start_date,end_date)
+    count_data = count_song(song_Data)
+    print(count_data)
+    return {"message": count_data,"user_info":user_info}
+
+@app.get("/artists")
+def Home_get(start_date:str=None,end_date:str=None):
+    user_info = get_user_info()
+    song_Data = get_db_data(start_date,end_date)
+    count_data = count_song(song_Data)
+    print(count_data)
     return {"message": count_data,"user_info":user_info}
 
 @app.get("/thismonth")
@@ -55,6 +71,7 @@ def This_month_data(start_date:str=None,end_date:str=None):
     user_info = get_user_info()
     data = get_db_data(start_date,end_date,type="this")
     count_data = count_song(data)
+
     return {"message": count_data,"user_info":user_info}
     
 @app.get("/lastmonth")
