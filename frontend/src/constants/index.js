@@ -1,8 +1,8 @@
 export const navLinks = [
-    {
-        id: "/",
-        title: "Home",
-    },
+    // {
+    //     id: "/",
+    //     title: "Home",
+    // },
     {
         id: "thismonth",
         title: "This Month",

@@ -14,9 +14,9 @@ export const Login = () => {
     const [songs, setSongs] = useState([]);
     const [userInfo, setUserInfo] = useState([]);
     const [artists, setArtists] = useState([]);
-    const [Start, setStart] = useState("");
-    const [End, setEnd] = useState("");
-    const [currentTab, setCurrentTab] = useState("Artist");
+    const [start, setStart] = useState("");
+    const [end, setEnd] = useState("");
+    const [currentTab, setCurrentTab] = useState("Song");
 
     const handleTabChange = (newTab) => {
         console.log('newTab: ', newTab)
@@ -67,7 +67,6 @@ export const Login = () => {
     };
     
 
-
     const selectspecificDate = (sdate,edate) => {
         sdate = new Date(sdate);
         edate = new Date(edate);
@@ -77,14 +76,14 @@ export const Login = () => {
         setStart(startDate);
         setEnd(endDate);
 
-        console.log(startDate, endDate)
+        console.log(start, end)
 
         let dateString = '';
         if(sdate && edate){
             dateString = `?start_date=${encodeURIComponent(startDate)}&end_date=${encodeURIComponent(endDate)}`
         }
 
-        songsAndArtistsApi('http://localhost:8000/', 'songs/', dateString)
+        songsAndArtistsApi('http://localhost:8000/', 'songs', dateString)
         .then(data => {
             setSongs(data["message"]);
             setUserInfo(data["user_info"]);
@@ -92,7 +91,7 @@ export const Login = () => {
             console.error(error);
         });
 
-        songsAndArtistsApi('http://localhost:8000/', 'artists/', dateString)
+        songsAndArtistsApi('http://localhost:8000/', 'artists', dateString)
         .then(data => {
             setArtists(data["message"]);
         }).catch(error => {
@@ -108,7 +107,7 @@ export const Login = () => {
         }).catch(error => {
             console.error(error);
         });
-        songsAndArtistsApi('http://localhost:8000/', 'artists/', '')
+        songsAndArtistsApi('http://localhost:8000/', 'artists', '')
         .then(data => {
             setArtists(data["message"]);
         }).catch(error => {
@@ -128,10 +127,10 @@ export const Login = () => {
             </div>
             <div className={`bg-gradient-to-t h-dvh  bg-slate-900 ${styles.paddingX} ${styles.flexStart}`}>
                 <div className={`${styles.boxWidth} `}>
-                    {currentTab === 'Song' && songs != null? (
+                    {currentTab === 'Song' && songs !== 0? (
                         <SongsList data={songs} />
-                    ) : currentTab === 'Artist' && songs != null? (
-                        <ArtistList data={songs} />
+                    ) : currentTab === 'Artist' && songs !== 0? (
+                        <ArtistList data={artists} />
                     )  : (
                         renderDefaultPage()
                     )}

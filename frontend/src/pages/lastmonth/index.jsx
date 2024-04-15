@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { NavBar } from '../../components/Navbar'
-import { SongsList } from '../../components/SongsList'
-import styles from '../../styles'
-import { renderDefaultPage } from '../../components/DefaultPage';
+import styles from '../../styles';
+import { NavBar } from '../../components/Navbar';
 import { Tabs } from '../../components/Tabs';
+import { SongsList } from '../../components/SongsList';
+import { ArtistList } from '../../components/AritstList';
+import { renderDefaultPage } from '../../components/DefaultPage';
 
-let url = 'http://localhost:8000/lastmonth'
+let d = new Date()
+
 
 export const LastMonth = () => {
 
-    const[songs, setSongs] = useState([]);
-    const[userInfo, setUserInfo] = useState([]);
+    const [songs, setSongs] = useState([]);
+    const [userInfo, setUserInfo] = useState([]);
+    const [artists, setArtists] = useState([]);
+    const [start, setStart] = useState(`${d.getFullYear}-${d.getMonth-1}-${1}`);
+    const [end, setEnd] = useState(`${d.getFullYear}-${d.getMonth}-${1}`);
+    const [currentTab, setCurrentTab] = useState("Song");
 
+    const handleTabChange = (newTab) => {
+        console.log('newTab: ', newTab)
+        setCurrentTab(newTab);
+    };
 
     const dateTransform = (date) => {
         let year = date.getFullYear();
@@ -22,16 +32,37 @@ export const LastMonth = () => {
     }
 
 
-    const songsApi = async(url, dateString) => {
-        const response  = await fetch(`${url}${dateString}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },    
-        })
-        const data = await response.json();
-        return data;
+    const fetchDataApi = async (url, endpoint, date, method = 'GET') => {
+        try {
+            console.log(`${url}${endpoint}${date}`);
+            const response = await fetch(`${url}${endpoint}${date}`, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            return null;
+        }
     }
+
+    const songsAndArtistsApi = async (url, endpoint, date) => {
+        return await fetchDataApi(url, endpoint, date);
+    };
+
+
+    let startdd = `${d.getFullYear()}-${d.getMonth()-1}-${1}`
+    let enddd = `${d.getFullYear()}-${d.getMonth()}-1`
+    // console.log(`${d.getFullYear()}-${d.getMonth()}-1`)
+
+    // let s = encodeURIComponent((startdd))
+    // let sd = encodeURIComponent((enddd))
 
     const selectspecificDate = (sdate,edate) => {
         sdate = new Date(sdate);
@@ -39,28 +70,44 @@ export const LastMonth = () => {
         const startDate = dateTransform(sdate);
         const endDate = dateTransform(edate);
 
-        console.log(startDate, endDate)
+        setStart(startDate);
+        setEnd(endDate);
+
+        console.log(start, end)
 
         let dateString = '';
         if(sdate && edate){
             dateString = `?start_date=${encodeURIComponent(startDate)}&end_date=${encodeURIComponent(endDate)}`
         }
 
-        songsApi(url, dateString)
+        songsAndArtistsApi('http://localhost:8000/', 'songs', dateString)
         .then(data => {
             setSongs(data["message"]);
             setUserInfo(data["user_info"]);
         }).catch(error => {
             console.error(error);
         });
+
+        songsAndArtistsApi('http://localhost:8000/', 'artists', dateString)
+        .then(data => {
+            setArtists(data["message"]);
+        }).catch(error => {
+            console.error(error);
+        });
     }
 
     useEffect(() => {
-        songsApi(url, '')
-
+  
+        songsAndArtistsApi('http://localhost:8000/', 'songs', `?start_date=${encodeURIComponent(startdd)}&end_date=${encodeURIComponent(enddd)}`)
         .then(data => {
             setSongs(data["message"]);
             setUserInfo(data["user_info"]);
+        }).catch(error => {
+            console.error(error);
+        });
+        songsAndArtistsApi('http://localhost:8000/', 'artists', `?start_date=${encodeURIComponent(startdd)}&end_date=${encodeURIComponent(enddd)}`)
+        .then(data => {
+            setArtists(data["message"]);
         }).catch(error => {
             console.error(error);
         });
@@ -74,13 +121,15 @@ export const LastMonth = () => {
                 </div>
             </div>
             <div className='w-full bg-gradient-to-r bg-slate-900'>
-                <Tabs />    
+                <Tabs currentTab={currentTab} onTabChange={handleTabChange} />  
             </div>
             <div className={`bg-gradient-to-t h-dvh  bg-slate-900 ${styles.paddingX} ${styles.flexStart}`}>
                 <div className={`${styles.boxWidth} `}>
-                    {songs && songs.length > 0 ? (
+                    {currentTab === 'Song' && songs !== 0? (
                         <SongsList data={songs} />
-                    ) : (
+                    ) : currentTab === 'Artist' && songs !== 0? (
+                        <ArtistList data={artists} />
+                    )  : (
                         renderDefaultPage()
                     )}
                 </div>

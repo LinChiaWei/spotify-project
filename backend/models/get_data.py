@@ -30,8 +30,11 @@ def find_songs_name(items):
 
     return last50songs
     
-def take_second(list):
+def sort_song(list):
     return list[4]
+
+def sort_artist(list):
+    return list[2]
 
 def trans_time(t):
     t = t.split('T')
@@ -96,10 +99,38 @@ def count_song(data):
         data = [item, song_count[item][1],song_count[item][2],song_count[item][3],song_count[item][0]]
         song_list.append(data)
 
-    song_list.sort(key=take_second,reverse=True)
+    song_list.sort(key=sort_song,reverse=True)
     
     return song_list
 
+def count_artist(data):
+    artist_count = {}
+    artist_list = []
+    for song in data:
+        artist_name = song[1]
+        artist_img_url =  song[2]
+        if artist_name in artist_count:
+            continue
+        else:
+            artist_count.setdefault(artist_name,[])
+            artist_count[artist_name].append(0)
+            artist_count[artist_name].append(artist_img_url)
+
+    for song in data:
+        artist_name = song[1]
+        artist_count[artist_name][0] +=1
+
+    for item in artist_count:
+        dic = {}
+        dic['Artist'] = item
+        dic['ArtistImg'] = artist_count[item][1]
+        dic['Count'] = artist_count[item][0]
+        data = [item, artist_count[item][1],artist_count[item][0]]
+        artist_list.append(data)
+
+    artist_list.sort(key=sort_artist,reverse=True)
+    
+    return artist_list
 
 def get_user_info():
     token = get_token()

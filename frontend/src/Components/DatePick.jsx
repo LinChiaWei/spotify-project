@@ -8,6 +8,7 @@ export const DatePick = (props) => {
     return(
         <div>
         <DatePicker 
+            showIcon={true}
             dateFormat="dd/MM/yyyy"
             selected = {date}
             maxDate={new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())}
@@ -15,7 +16,8 @@ export const DatePick = (props) => {
                 setDate(date)
                 props.selectDate(date)
             }}
-           
+            icon="fa fa-calendar"
+            placeholderText = {props.text}
         />
         </div>
     )

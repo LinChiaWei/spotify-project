@@ -3,8 +3,6 @@ import  close  from '../assets/images/close.svg';
 import  menu  from '../assets/images/menu.svg';
 import { navLinks } from '../constants/index';
 import { DatePick } from './DatePick';
-// import DatePicker from "react-datepicker";
-// import 'react-datepicker/dist/react-datepicker.css'
 
 
 export const NavBar = (props) => {
@@ -23,7 +21,7 @@ export const NavBar = (props) => {
 
   return (
     <nav className="w-full flex justify-between items-center navbar pt-3">
-      <h1 className="text-lime-400 font-medium text-2xl px-5 tracking-tighter">SPOTIFY RANK</h1>
+      <a href="/" className="text-lime-400 font-medium text-2xl px-5 tracking-tighter">SPOTIFY RANK</a>
       <ul className="list-none sm:flex hidden jusitfy-end items-center flex-1">
         {navLinks.map((nav, index) => (
           <li
@@ -34,14 +32,12 @@ export const NavBar = (props) => {
               {nav.title}
             </a>
           </li>))}
-          <div className="relative flex flex-wrap px-2 -mt-4">
+          <div className="relative flex flex-wrap px-2 ">
             <div className="font-medium px-4 ">
-              <h1 className="text-gray-100 text-center mb-2">Start Date</h1>
-              <DatePick selectDate={selectStartDate}/>
+              <DatePick selectDate={selectStartDate} text={"Start date"}/>
             </div>
             <div className= "font-medium px-4 ">
-              <h1 className="text-gray-100 text-center mb-2">End date</h1>
-              <DatePick selectDate={selectEndDate}/>
+              <DatePick selectDate={selectEndDate} text={"End date"}/>
             </div>
           </div>
           <div className="px-1 content-center">

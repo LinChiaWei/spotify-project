@@ -2,11 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_utils.session import FastAPISessionMaker
 from fastapi_utils.tasks import repeat_every
-from models.get_data import get_data, count_song
+from models.get_data import get_data, count_song, count_artist
 from models.insert_db import insert_db
 from models.check_db import check_db
 from models.get_data import get_user_info
-from models.get_db_data import get_db_data
+from models.get_db_data import get_db_song
 from models.update_data import check_duplicate
 from datetime import datetime
 
@@ -38,10 +38,8 @@ swagger_ui_default_parameters = {
 def update_data():
     check = check_db()
     new_data = get_data()
-    # print(new_data)
     if(check):
-        old_data = get_db_data()
-        # print(old_data)
+        old_data = get_db_song()
         data_in = check_duplicate(old_data,new_data)
         print(data_in)
         insert_db(data_in)
@@ -53,23 +51,31 @@ def update_data():
 @app.get("/songs")
 def Home_get(start_date:str=None,end_date:str=None):
     user_info = get_user_info()
-    song_Data = get_db_data(start_date,end_date)
+    song_Data = get_db_song(start_date,end_date)
     count_data = count_song(song_Data)
-    print(count_data)
+    # print(count_data)
     return {"message": count_data,"user_info":user_info}
 
 @app.get("/artists")
 def Home_get(start_date:str=None,end_date:str=None):
     user_info = get_user_info()
-    song_Data = get_db_data(start_date,end_date)
-    count_data = count_song(song_Data)
-    print(count_data)
-    return {"message": count_data,"user_info":user_info}
+    artist_Data = get_db_song(start_date,end_date)
+    count_data = count_artist(artist_Data)
+    # print(count_data)
+    return {"message": count_data}
+
+@app.get("/genres")
+def Home_get(start_date:str=None,end_date:str=None):
+    user_info = get_user_info()
+    artist_Data = get_db_song(start_date,end_date)
+    count_data = count_artist(artist_Data)
+    # print(count_data)
+    return {"message": count_data}
 
 @app.get("/thismonth")
 def This_month_data(start_date:str=None,end_date:str=None):
     user_info = get_user_info()
-    data = get_db_data(start_date,end_date,type="this")
+    data = get_db_song(start_date,end_date,type="this")
     count_data = count_song(data)
 
     return {"message": count_data,"user_info":user_info}
@@ -77,7 +83,7 @@ def This_month_data(start_date:str=None,end_date:str=None):
 @app.get("/lastmonth")
 def Last_month_data(start_date:str=None,end_date:str=None):
     user_info = get_user_info()
-    data = get_db_data(start_date,end_date,type="last")
+    data = get_db_song(start_date,end_date,type="last")
     count_data = count_song(data)
     return {"message": count_data,"user_info":user_info}
     
