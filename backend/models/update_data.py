@@ -17,16 +17,17 @@ def update_data(db_data,new_data):
 def check_duplicate(db_data,new_data):
     result = []
     flag = False
-    
+
+    print("check_duplicate")
+
     for i in new_data:
         for j in db_data:
-            print(i[3],str(j[4]))
             if i[3] == str(j[4]):
                 flag = True
                 break
         if flag == False:
             result.append(i)
-    if(len(result) > 0):
+    if(len(result) == 0):
         print("No data to update")
     return result
 

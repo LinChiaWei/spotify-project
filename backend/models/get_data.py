@@ -4,7 +4,6 @@ from models.get_token import get_token
 import time
 import requests as rq
 
-
 def find_songs_name(items):
     last50songs = []
     for i in range(len(items)):
@@ -44,7 +43,6 @@ def trans_time(t):
 
 def get_artist_info(artist_id,headers):
     URL = 'https://api.spotify.com/v1/artists/{}'.format(artist_id)
-    # output = rq.get(URL,headers=headers).headers
     output = rq.get(URL,headers=headers).json()
     return output
 
@@ -99,7 +97,7 @@ def count_song(data):
         data = [item, song_count[item][1],song_count[item][2],song_count[item][3],song_count[item][0]]
         song_list.append(data)
 
-    song_list.sort(key=sort_song,reverse=True)
+    song_list.sort(key=sort_song, reverse=True)
     
     return song_list
 
