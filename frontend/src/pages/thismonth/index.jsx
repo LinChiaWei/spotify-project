@@ -5,9 +5,11 @@ import { Tabs } from '../../components/Tabs';
 import { SongsList } from '../../components/SongsList';
 import { ArtistList } from '../../components/AritstList';
 import { renderDefaultPage } from '../../components/DefaultPage';
+import ScrollToTop from "react-scroll-to-top";
 
 let d = new Date()
-
+let startdd = `${d.getFullYear()}-${d.getMonth()+1}-${1}`
+let enddd = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
 
 export const ThisMonth = () => {
 
@@ -41,7 +43,6 @@ export const ThisMonth = () => {
                     'Content-Type': 'application/json',
                 },
             });
-    
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -57,11 +58,6 @@ export const ThisMonth = () => {
     };
 
 
-    let startdd = `${d.getFullYear()}-${d.getMonth()}-${1}`
-    let enddd = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
-
-    // let s = encodeURIComponent((startdd))
-    // let sd = encodeURIComponent((enddd))
 
     const selectspecificDate = (sdate,edate) => {
         sdate = new Date(sdate);
@@ -96,7 +92,6 @@ export const ThisMonth = () => {
     }
 
     useEffect(() => {
-  
         songsAndArtistsApi('http://localhost:8000/', 'songs', `?start_date=${encodeURIComponent(startdd)}&end_date=${encodeURIComponent(enddd)}`)
         .then(data => {
             setSongs(data["message"]);
@@ -132,6 +127,7 @@ export const ThisMonth = () => {
                         renderDefaultPage()
                     )}
                 </div>
+                <ScrollToTop smooth />
             </div>
         </div>
     );

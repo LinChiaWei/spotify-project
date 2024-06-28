@@ -4,16 +4,17 @@ import { NavBar } from '../../components/Navbar';
 import { Tabs } from '../../components/Tabs';
 import { SongsList } from '../../components/SongsList';
 import { ArtistList } from '../../components/AritstList';
+import { History } from '../../components/History';
 import { renderDefaultPage } from '../../components/DefaultPage';
+import ScrollToTop from "react-scroll-to-top";
 
-
-// let url = 'http://localhost:8000/'
 
 export const Login = () => {
 
     const [songs, setSongs] = useState([]);
     const [userInfo, setUserInfo] = useState([]);
     const [artists, setArtists] = useState([]);
+    const [history, setHistory] = useState([]);
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
     const [currentTab, setCurrentTab] = useState("Song");
@@ -31,16 +32,6 @@ export const Login = () => {
         return dateString;
     }
 
-    // const fetchDataApi = async(url, date) => {
-    //     const response  = await fetch(`${url}${date}`, {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },    
-    //     })
-    //     const data = await response.json();
-    //     return data;
-    // }
 
     const fetchDataApi = async (url, endpoint, date, method = 'GET') => {
         try {
@@ -65,7 +56,9 @@ export const Login = () => {
     const songsAndArtistsApi = async (url, endpoint, date) => {
         return await fetchDataApi(url, endpoint, date);
     };
-    
+    const HistoryApi = async (url, endpoint, date) => {
+        return await fetchDataApi(url, endpoint, date);
+    };
 
     const selectspecificDate = (sdate,edate) => {
         sdate = new Date(sdate);
@@ -97,6 +90,12 @@ export const Login = () => {
         }).catch(error => {
             console.error(error);
         });
+        HistoryApi('http://localhost:8000/', 'history', dateString)
+        .then(data => {
+            setHistory(data["message"]);
+        }).catch(error => {
+            console.error(error);
+        });
     }
 
     useEffect(() => {
@@ -110,6 +109,12 @@ export const Login = () => {
         songsAndArtistsApi('http://localhost:8000/', 'artists', '')
         .then(data => {
             setArtists(data["message"]);
+        }).catch(error => {
+            console.error(error);
+        });
+        HistoryApi('http://localhost:8000/', 'history', '')
+        .then(data => {
+            setHistory(data["message"]);
         }).catch(error => {
             console.error(error);
         });
@@ -131,10 +136,13 @@ export const Login = () => {
                         <SongsList data={songs} />
                     ) : currentTab === 'Artist' && songs !== 0? (
                         <ArtistList data={artists} />
-                    )  : (
+                    )  : currentTab === 'History' && songs !== 0?(
+                        <History data={history} />
+                    ) : (
                         renderDefaultPage()
                     )}
                 </div>
+                <ScrollToTop smooth />
             </div>
         </div>
     );

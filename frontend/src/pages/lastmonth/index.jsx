@@ -5,9 +5,11 @@ import { Tabs } from '../../components/Tabs';
 import { SongsList } from '../../components/SongsList';
 import { ArtistList } from '../../components/AritstList';
 import { renderDefaultPage } from '../../components/DefaultPage';
+import ScrollToTop from "react-scroll-to-top";
 
 let d = new Date()
-
+let startdd = `${d.getFullYear()}-${d.getMonth()}-${1}`
+let enddd = `${d.getFullYear()}-${d.getMonth()+1}-1`
 
 export const LastMonth = () => {
 
@@ -56,14 +58,6 @@ export const LastMonth = () => {
         return await fetchDataApi(url, endpoint, date);
     };
 
-
-    let startdd = `${d.getFullYear()}-${d.getMonth()-1}-${1}`
-    let enddd = `${d.getFullYear()}-${d.getMonth()}-1`
-    // console.log(`${d.getFullYear()}-${d.getMonth()}-1`)
-
-    // let s = encodeURIComponent((startdd))
-    // let sd = encodeURIComponent((enddd))
-
     const selectspecificDate = (sdate,edate) => {
         sdate = new Date(sdate);
         edate = new Date(edate);
@@ -72,8 +66,6 @@ export const LastMonth = () => {
 
         setStart(startDate);
         setEnd(endDate);
-
-        console.log(start, end)
 
         let dateString = '';
         if(sdate && edate){
@@ -97,7 +89,6 @@ export const LastMonth = () => {
     }
 
     useEffect(() => {
-  
         songsAndArtistsApi('http://localhost:8000/', 'songs', `?start_date=${encodeURIComponent(startdd)}&end_date=${encodeURIComponent(enddd)}`)
         .then(data => {
             setSongs(data["message"]);
@@ -125,6 +116,7 @@ export const LastMonth = () => {
             </div>
             <div className={`bg-gradient-to-t h-dvh  bg-slate-900 ${styles.paddingX} ${styles.flexStart}`}>
                 <div className={`${styles.boxWidth} `}>
+                    {songs.length === 0 && artists.length === 0 && renderDefaultPage()}
                     {currentTab === 'Song' && songs !== 0? (
                         <SongsList data={songs} />
                     ) : currentTab === 'Artist' && songs !== 0? (
@@ -133,6 +125,7 @@ export const LastMonth = () => {
                         renderDefaultPage()
                     )}
                 </div>
+                <ScrollToTop smooth />
             </div>
         </div>
     );

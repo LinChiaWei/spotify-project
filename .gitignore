@@ -7,3 +7,6 @@
 /.cache
 /backend/models/.cache
 /backend/models/test.ipynb
+__pycache__/
+*.pyc
+/backend/tests/
