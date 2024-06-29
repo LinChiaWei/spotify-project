@@ -7,8 +7,9 @@ class DatabaseManager:
         self.password = "postgres"
         self.host = "127.0.0.1"
         self.port = "5432"
+        self.connection = self._connect_db()
 
-    def connect_db(self):
+    def _connect_db(self):
         try:
             connection = psycopg2.connect(
                 database=self.db_name,
@@ -23,32 +24,38 @@ class DatabaseManager:
             return None
 
 
-    def close_db(self):
+    def _close_db(self):
         if self.connection:
             self.connection.close()
 
 
-    def insert_db(self, data):
+    def insert(self, data):
         try:
-            cursor = self.connection.cursor()
+            cursor = self.connection
 
             for l in data:
                 song_detail = [l[0], l[2], l[3]]
                 artist_detail = [l[1], l[4]]
                 genre_data = l[5]
 
-                cursor.execute("SELECT COUNT(*) FROM listened_list WHERE timestamp_column = %s", (song_detail[2],))
+                cursor.execute("SELECT COUNT(*) FROM listened_list \
+                                WHERE timestamp_column = %s", (song_detail[2],))
                 timestamp_exists = cursor.fetchone()[0] > 0
                 
                 if timestamp_exists:
                     print(f"Timestamp {song_detail[2]} already exists. Skipping insert.")
                     continue
 
-                cursor.execute("INSERT INTO artist (artist_name, img_url) VALUES (%s, %s) RETURNING artist_id", artist_detail)
+                cursor.execute("INSERT INTO artist (artist_name, img_url) \
+                                VALUES (%s, %s) \
+                                RETURNING artist_id", artist_detail)
+
                 artist_id = cursor.fetchone()[0]
 
                 cursor.execute(
-                    "INSERT INTO listened_list (song_name, image_url, timestamp_column, artist_id) VALUES (%s, %s, %s, %s) RETURNING song_id",
+                    "INSERT INTO listened_list (song_name, image_url, timestamp_column, artist_id) \
+                    VALUES (%s, %s, %s, %s) \
+                    RETURNING song_id",
                     (song_detail[0], song_detail[1], song_detail[2], artist_id)
                 )
                 song_id = cursor.fetchone()[0]
@@ -59,22 +66,25 @@ class DatabaseManager:
                     if existing_genre:
                         genre_id = existing_genre[0]
                     else:
-                        cursor.execute("INSERT INTO genres (genre) VALUES (%s) RETURNING genre_id", (genre,))
+                        cursor.execute("INSERT INTO genres (genre) \
+                                        VALUES (%s) \
+                                        RETURNING genre_id", (genre,))
                         genre_id = cursor.fetchone()[0]
 
-                    cursor.execute("INSERT INTO song_genre (song_id, genre_id) VALUES (%s, %s)", (song_id, genre_id))
+                    cursor.execute("INSERT INTO song_genre (song_id, genre_id) \
+                                    VALUES (%s, %s)", (song_id, genre_id))
 
             print("Insert Table successfully")
             connection.commit()
         except Exception as e:
             print(f"Error inserting data: {e}")
         finally:
-            close_db()
+            self._close_db()
 
 
-    def get_song(self, start_date=None, end_date=None, type=None):
+    def get_song(self, start_date = None, end_date = None, type = None):
         try:
-            cursor = self.connection.cursor()
+            cursor = self.connection
 
             if start_date != None and end_date != None:
                 cursor.execute("SELECT ll.song_name, a.artist_name, a.img_url, ll.image_url, ll.timestamp_column\
@@ -87,17 +97,16 @@ class DatabaseManager:
                                 INNER JOIN artist a ON ll.artist_id = a.artist_id;")
                                 
             rows = cursor.fetchall()
-            connection.close()
+            return rows
         except Exception as e:
             print(f"Error fetching data: {e}")
         finally:
-            close_db()
+            self._close_db()
 
-        return rows
 
     def get_history(self, num = 50):
         try:
-            cursor = self.connection.cursor()
+            cursor = self.connection
 
             cursor.execute("SELECT ll.song_name, a.artist_name, a.img_url, ll.image_url, ll.timestamp_column \
                             FROM listened_list ll \
@@ -105,16 +114,17 @@ class DatabaseManager:
                             ORDER BY ll.timestamp_column DESC LIMIT %s;", (num,))
         
             rows = cursor.fetchall()
+            return rows
         except Exception as e:
             print(f"Error fetching data: {e}")
         finally:
-            close_db()
-        return rows
+            self._close_db()
+
 
 
     def get_genres(self):
         try:
-            cursor = self.connection.cursor()
+            cursor = self.connection
 
             cursor.execute("SELECT song_id, genres_id FROM song_genres;")
             rows = cursor.fetchall()
@@ -126,25 +136,17 @@ class DatabaseManager:
                 corsor.execute("SELECT genres FROM genres WHERE id = %s;",(row[1],))
                 genre = cursor.fetchone()
                 result.append((row[0],genre[0]))
+            return result
         except Exception as e:
             print(f"Error fetching data: {e}")
         finally:
-            close_db()
+            self._close_db()
 
-        return rows
 
-    def check_db():
+
+    def check_db_exist():
         try:
-            connection = psycopg2.connect(
-                database="postgres",
-                user="postgres",
-                password="postgres",
-                host="127.0.0.1",
-                port='5432'
-            )
-            print("Database opened successfully")
-
-            cursor = connection.cursor()
+            cursor = self.connection
 
             cursor.execute("""
                 SELECT EXISTS (
@@ -192,5 +194,4 @@ class DatabaseManager:
         except psycopg2.Error as e:
             print("Error connecting to the database:", e)
         finally:
-            if connection:
-                connection.close()
+            self._close_db()

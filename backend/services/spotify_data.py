@@ -1,8 +1,10 @@
 import spotipy
-from models.oauth2 import Oauth2
 import time
 import requests as rq
 from typing import List, Dict, Any
+from models.oauth2 import Oauth2
+
+
 
 class Spotify_API:
     def __init__(self):
@@ -14,7 +16,6 @@ class Spotify_API:
     def extract_artist_info(self, artist_info: List[Dict[str, Any]]) -> (str, str):
         artist_name = artist_info[0]['name']
         artist_id = artist_info[0]['id']
-
         return artist_name, artist_id
 
     def extract_album_info(self, album: Dict[str, Any]) -> (str, str):
@@ -41,6 +42,7 @@ class Spotify_API:
         for track in recent_tracks:
             artist_info = self.fetch_artist_info(track[-1])
             self.fetch_artist_genres(track, artist_info)
+            
         return recent_tracks
 
     def fetch_artist_genres(self, track: List, artist_info: Dict[str, Any]):
