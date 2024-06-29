@@ -5,8 +5,10 @@ import { Tabs } from '../../components/Tabs';
 import { SongsList } from '../../components/SongsList';
 import { ArtistList } from '../../components/AritstList';
 import { History } from '../../components/History';
+import { Genres } from '../../components/GenresList';
 import { renderDefaultPage } from '../../components/DefaultPage';
 import ScrollToTop from "react-scroll-to-top";
+
 
 
 export const Login = () => {
@@ -15,6 +17,7 @@ export const Login = () => {
     const [userInfo, setUserInfo] = useState([]);
     const [artists, setArtists] = useState([]);
     const [history, setHistory] = useState([]);
+    const [genres, setGenres] = useState([]);
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
     const [currentTab, setCurrentTab] = useState("Song");
@@ -59,6 +62,9 @@ export const Login = () => {
     const HistoryApi = async (url, endpoint, date) => {
         return await fetchDataApi(url, endpoint, date);
     };
+    const genresApi = async (url, endpoint, date) => {
+        return await fetchDataApi(url, endpoint, date);
+    };
 
     const selectspecificDate = (sdate,edate) => {
         sdate = new Date(sdate);
@@ -90,9 +96,17 @@ export const Login = () => {
         }).catch(error => {
             console.error(error);
         });
+
         HistoryApi('http://localhost:8000/', 'history', dateString)
         .then(data => {
             setHistory(data["message"]);
+        }).catch(error => {
+            console.error(error);
+        });
+
+        genresApi('http://localhost:8000/', 'genres', dateString)
+        .then(data => {
+            setGenres(data["message"]);
         }).catch(error => {
             console.error(error);
         });
@@ -106,12 +120,21 @@ export const Login = () => {
         }).catch(error => {
             console.error(error);
         });
+
         songsAndArtistsApi('http://localhost:8000/', 'artists', '')
         .then(data => {
             setArtists(data["message"]);
         }).catch(error => {
             console.error(error);
         });
+
+        genresApi('http://localhost:8000/', 'genres', '')
+        .then(data => {
+            setGenres(data["message"]);
+        }).catch(error => {
+            console.error(error);
+        });
+
         HistoryApi('http://localhost:8000/', 'history', '')
         .then(data => {
             setHistory(data["message"]);
@@ -132,12 +155,15 @@ export const Login = () => {
             </div>
             <div className={`bg-gradient-to-t h-dvh  bg-slate-900 ${styles.paddingX} ${styles.flexStart}`}>
                 <div className={`${styles.boxWidth} `}>
-                    {currentTab === 'Song' && songs !== 0? (
+                    {currentTab === 'Song' && songs !== 0 ? (
                         <SongsList data={songs} />
-                    ) : currentTab === 'Artist' && songs !== 0? (
+                    ) : currentTab === 'Artist' && songs !== 0 ? (
                         <ArtistList data={artists} />
-                    )  : currentTab === 'History' && songs !== 0?(
+                    )  : currentTab === 'History' && songs !== 0 ? (
                         <History data={history} />
+                    ) : currentTab === 'Genre' && songs !== 0 ? (
+                        
+                        <Genres data={genres} />
                     ) : (
                         renderDefaultPage()
                     )}
