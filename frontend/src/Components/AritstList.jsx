@@ -2,7 +2,7 @@
 // import { Card,Paper, CardMedia} from '@mui/material';
 import React from 'react';
 
-export const SongsList = (props) => {
+export const ArtistList = (props) => {
     return(
         <div className="mt-4 grid grid-cols-2 gap-x-24 gap-y-5 sm:grid-cols-3 lg:grid-cols-4 xl:gap-x-5 drop-shadow-md mb-4">
         {props.data.map((item, index) => ( 
@@ -13,19 +13,19 @@ export const SongsList = (props) => {
               </div>
             </div>
             <div className="bg-black static ">                  
-              <img className="aspect-square object-contain rounded-sm" src={item[3]} alt="cover"/>
+              <img className="aspect-square object-contain rounded-sm" src={item[1]} alt="cover"/>
             </div>
             <div className="p-2">
-              <div className="tracking-wide font-center font-bold text-gray-100 truncate">
+              {/* <div className="tracking-wide font-center font-bold text-gray-100 truncate">
                 {item[0]}
-              </div>
+              </div> */}
               <div className="tracking-wide font-center text-gray-100 truncate">
-                {item[1]}
+                {item[0]}
               </div>
             </div>
             <div className="pt-2 px-2">
               <div className="tracking-tight pt-2 pb-3 font-center text-sm text-gray-300 font-mono">
-                Song Count: {item[4]}
+                Song Count: {item[2]}
               </div>
             </div>
           </div>
